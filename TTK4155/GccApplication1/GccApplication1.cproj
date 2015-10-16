@@ -111,6 +111,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="can.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -135,6 +141,15 @@
     <Compile Include="joy.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="mcp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mcp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mcp_defines.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="oled.c">
       <SubType>compile</SubType>
     </Compile>
@@ -145,6 +160,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="spi.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SRAM.c">

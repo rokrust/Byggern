@@ -37,10 +37,12 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../can.c \
 ../font.c \
 ../GccApplication1.c \
 ../interface.c \
 ../joy.c \
+../mcp.c \
 ../oled.c \
 ../spi.c \
 ../SRAM.c \
@@ -54,40 +56,48 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+can.o \
 font.o \
 GccApplication1.o \
 interface.o \
 joy.o \
+mcp.o \
 oled.o \
 spi.o \
 SRAM.o \
 usart.o
 
 OBJS_AS_ARGS +=  \
+can.o \
 font.o \
 GccApplication1.o \
 interface.o \
 joy.o \
+mcp.o \
 oled.o \
 spi.o \
 SRAM.o \
 usart.o
 
 C_DEPS +=  \
+can.d \
 font.d \
 GccApplication1.d \
 interface.d \
 joy.d \
+mcp.d \
 oled.d \
 spi.d \
 SRAM.d \
 usart.d
 
 C_DEPS_AS_ARGS +=  \
+can.d \
 font.d \
 GccApplication1.d \
 interface.d \
 joy.d \
+mcp.d \
 oled.d \
 spi.d \
 SRAM.d \
@@ -107,6 +117,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

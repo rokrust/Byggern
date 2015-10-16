@@ -1,2 +1,2 @@
 void SPI_masterInit(void);
-void SPI_transmit(char cData);
+uint8_t SPI_transmit(char cData);

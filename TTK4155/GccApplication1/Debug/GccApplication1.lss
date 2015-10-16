@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 000001a8  00000000  00000000  000019ce  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00001a4b  00000000  00000000  00001b76  2**0
+  5 .debug_info   00001a52  00000000  00000000  00001b76  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000a43  00000000  00000000  000035c1  2**0
+  6 .debug_abbrev 00000a43  00000000  00000000  000035c8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000a3e  00000000  00000000  00004004  2**0
+  7 .debug_line   00000a3e  00000000  00000000  0000400b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000410  00000000  00000000  00004a44  2**2
+  8 .debug_frame  00000410  00000000  00000000  00004a4c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000005ff  00000000  00000000  00004e54  2**0
+  9 .debug_str    00000607  00000000  00000000  00004e5c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000d54  00000000  00000000  00005453  2**0
+ 10 .debug_loc    00000d54  00000000  00000000  00005463  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000160  00000000  00000000  000061a7  2**0
+ 11 .debug_ranges 00000160  00000000  00000000  000061b7  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -480,10 +480,10 @@ Disassembly of section .text:
      3a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000003a6 <main>:
-#include "interface.h"
+#include "can.h"
+#include "mcp_defines.h"
 
 
- 
 int main(void)
 {
      3a6:	cf 93       	push	r28
@@ -547,6 +547,7 @@ int main(void)
 	interface_print(current_menu);
      40e:	0e 94 a6 02 	call	0x54c	; 0x54c <interface_print>
 	
+	//mcp_write(CANSTAT)
     while(1)
         {	
 			JOY_read_joystick(&joy_position);

@@ -92,6 +92,27 @@ Discarded input sections
 
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm162.o
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm162.o
+ .text          0x00000000        0x0 can.o
+ .data          0x00000000        0x0 can.o
+ .bss           0x00000000        0x0 can.o
+ .text.new_message
+                0x00000000        0x6 can.o
+ .text.can_init
+                0x00000000        0x2 can.o
+ .text.can_read
+                0x00000000        0x6 can.o
+ .text.can_write
+                0x00000000       0x82 can.o
+ .debug_info    0x00000000      0x2ba can.o
+ .debug_abbrev  0x00000000      0x1a2 can.o
+ .debug_loc     0x00000000      0x11f can.o
+ .debug_aranges
+                0x00000000       0x38 can.o
+ .debug_ranges  0x00000000       0x28 can.o
+ .debug_line    0x00000000      0x106 can.o
+ .debug_str     0x00000000      0x1e1 can.o
+ .comment       0x00000000       0x31 can.o
+ .debug_frame   0x00000000       0x74 can.o
  .text          0x00000000        0x0 font.o
  .data          0x00000000        0x0 font.o
  .bss           0x00000000        0x0 font.o
@@ -114,6 +135,31 @@ Discarded input sections
                 0x00000000        0x8 joy.o
  .text.JOY_read_toggle_button
                 0x00000000        0x6 joy.o
+ .text          0x00000000        0x0 mcp.o
+ .data          0x00000000        0x0 mcp.o
+ .bss           0x00000000        0x0 mcp.o
+ .text.mcp_read
+                0x00000000       0x1e mcp.o
+ .text.mcp_write
+                0x00000000       0x32 mcp.o
+ .text.mcp_reset
+                0x00000000        0xc mcp.o
+ .text.mcp_bitModify
+                0x00000000       0x3e mcp.o
+ .text.mcp_requestToSend
+                0x00000000        0xa mcp.o
+ .text.mcp_readStatus
+                0x00000000       0x12 mcp.o
+ .debug_info    0x00000000      0x297 mcp.o
+ .debug_abbrev  0x00000000      0x124 mcp.o
+ .debug_loc     0x00000000      0x1d4 mcp.o
+ .debug_aranges
+                0x00000000       0x48 mcp.o
+ .debug_ranges  0x00000000       0x38 mcp.o
+ .debug_line    0x00000000      0x118 mcp.o
+ .debug_str     0x00000000      0x1c8 mcp.o
+ .comment       0x00000000       0x31 mcp.o
+ .debug_frame   0x00000000       0xac mcp.o
  .text          0x00000000        0x0 oled.o
  .data          0x00000000        0x0 oled.o
  .bss           0x00000000        0x0 oled.o
@@ -124,14 +170,14 @@ Discarded input sections
                 0x00000000        0xc spi.o
  .text.SPI_transmit
                 0x00000000        0xa spi.o
- .debug_info    0x00000000       0xb0 spi.o
- .debug_abbrev  0x00000000       0x78 spi.o
+ .debug_info    0x00000000       0xb4 spi.o
+ .debug_abbrev  0x00000000       0x7a spi.o
  .debug_loc     0x00000000       0x1f spi.o
  .debug_aranges
                 0x00000000       0x28 spi.o
  .debug_ranges  0x00000000       0x18 spi.o
- .debug_line    0x00000000       0xbf spi.o
- .debug_str     0x00000000      0x169 spi.o
+ .debug_line    0x00000000       0xc0 spi.o
+ .debug_str     0x00000000      0x171 spi.o
  .comment       0x00000000       0x31 spi.o
  .debug_frame   0x00000000       0x34 spi.o
  .text          0x00000000        0x0 SRAM.o
@@ -426,10 +472,12 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm162.o
+LOAD can.o
 LOAD font.o
 LOAD GccApplication1.o
 LOAD interface.o
 LOAD joy.o
+LOAD mcp.o
 LOAD oled.o
 LOAD spi.o
 LOAD SRAM.o
@@ -954,15 +1002,15 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1a4b
+.debug_info     0x00000000     0x1a52
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000       0xb1 font.o
- .debug_info    0x000000b1      0x449 GccApplication1.o
- .debug_info    0x000004fa      0x70b interface.o
- .debug_info    0x00000c05      0x430 joy.o
- .debug_info    0x00001035      0x67d oled.o
- .debug_info    0x000016b2      0x224 SRAM.o
- .debug_info    0x000018d6      0x175 usart.o
+ .debug_info    0x000000b1      0x450 GccApplication1.o
+ .debug_info    0x00000501      0x70b interface.o
+ .debug_info    0x00000c0c      0x430 joy.o
+ .debug_info    0x0000103c      0x67d oled.o
+ .debug_info    0x000016b9      0x224 SRAM.o
+ .debug_info    0x000018dd      0x175 usart.o
 
 .debug_abbrev   0x00000000      0xa43
  *(.debug_abbrev)
@@ -993,21 +1041,21 @@ END GROUP
  .debug_frame   0x00000304       0xb8 SRAM.o
  .debug_frame   0x000003bc       0x54 usart.o
 
-.debug_str      0x00000000      0x5ff
+.debug_str      0x00000000      0x607
  *(.debug_str)
  .debug_str     0x00000000      0x10a font.o
                                 0x147 (size before relaxing)
- .debug_str     0x0000010a      0x152 GccApplication1.o
-                                0x26a (size before relaxing)
- .debug_str     0x0000025c      0x13c interface.o
+ .debug_str     0x0000010a      0x15a GccApplication1.o
+                                0x27b (size before relaxing)
+ .debug_str     0x00000264      0x13c interface.o
                                 0x31b (size before relaxing)
- .debug_str     0x00000398       0xef joy.o
+ .debug_str     0x000003a0       0xef joy.o
                                 0x2ab (size before relaxing)
- .debug_str     0x00000487       0x6d oled.o
+ .debug_str     0x0000048f       0x6d oled.o
                                 0x282 (size before relaxing)
- .debug_str     0x000004f4       0xcb SRAM.o
+ .debug_str     0x000004fc       0xcb SRAM.o
                                 0x231 (size before relaxing)
- .debug_str     0x000005bf       0x40 usart.o
+ .debug_str     0x000005c7       0x40 usart.o
                                 0x1ed (size before relaxing)
 
 .debug_loc      0x00000000      0xd54

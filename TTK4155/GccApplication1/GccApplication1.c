@@ -20,9 +20,12 @@
 #include "oled.h"
 #include "SRAM.h"
 #include "interface.h"
+#include "spi.h"
+#include "mcp.h"
+#include "can.h"
+#include "mcp_defines.h"
 
 
- 
 int main(void)
 {
 	Joystick joy_position;
@@ -43,10 +46,12 @@ int main(void)
 	
 	interface_print(current_menu);
 	
+	//mcp_write(CANSTAT)
     while(1)
         {	
 			JOY_read_joystick(&joy_position);
 			interface_select(&joy_position, &select_pos, &current_menu);
+			
 		}
 		
 	return 1;

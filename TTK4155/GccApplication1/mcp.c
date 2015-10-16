@@ -1,6 +1,7 @@
 #include "mcp.h"
 #include "mcp_defines.h"
 #include "spi.h"
+#include <avr/io.h>
 
 char mcp_read(uint8_t address){
 	PORTB &= ~(1 << MCP_CS);
@@ -44,11 +45,18 @@ void mcp_requestToSend(uint8_t buffer){
 	
 	PORTB |= (1<< MCP_CS);
 } 
-uint8_t mcp_read_status(void){
+
+
+uint8_t mcp_readStatus(void){
 	PORTB &= ~(1 << MCP_CS);
 	SPI_transmit(MCP_READ_STATUS);
 	uint8_t status = SPI_transmit(0x00);
 	PORTB |= (1<< MCP_CS);
 	
 	return status;
+}
+
+void mcp_init(void){
+	SPI_masterInit();
+	mcp_reset();
 }
