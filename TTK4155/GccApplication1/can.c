@@ -5,8 +5,8 @@
 #include <stdlib.h>
 void can_init(){
 	mcp_init();
-	mcp_bitModify(RXB0CTRL, MCP_RXBCTRL_MASK, 0xff);
-	mcp_bitModify(RXB1CTRL, MCP_RXBCTRL_MASK, 0xff);	
+	mcp_bitModify(MCP_RXB0CTRL, MCP_RXBCTRL_MASK, 0xff);
+	mcp_bitModify(MCP_RXB1CTRL, MCP_RXBCTRL_MASK, 0xff);	
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 }
 
@@ -52,12 +52,12 @@ uint8_t can_pollInterrupt(void){
 		//Finds the register that sent an interrupt signal
 		if(interrupt_register & MCP_RX0IF){
 			mcp_bitModify(MCP_CANINTF, MCP_RX0IF, 0xFF);
-			return RXB0CTRL;
+			return MCP_RXB0CTRL;
 		}
 		
 		else if(interrupt_register & MCP_RX1IF){
 			mcp_bitModify(MCP_CANINTF, MCP_RX1IF, 0xFF);
-			return RXB1CTRL;
+			return MCP_RXB1CTRL;
 		}	
 	}
 	
