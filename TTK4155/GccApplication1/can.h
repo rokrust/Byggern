@@ -9,6 +9,8 @@ struct can_message{
 	
 };
 
+void can_init(void);
+
 can_message can_read(void);
 
 //tx_buffer is the address of the control register

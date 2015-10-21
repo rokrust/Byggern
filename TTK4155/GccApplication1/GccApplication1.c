@@ -41,14 +41,16 @@ int main(void)
 	JOY_init(&joy_position);
 	printf("JOY setup done\n");
 	oled_init();
+	can_init();
 	printf("Initialization done\n");
 	current_menu = interface_init();
-	
+
 	interface_print(current_menu);
 	
 	//mcp_write(CANSTAT)
     while(1)
         {	
+			SPI_transmit(0x72);
 			JOY_read_joystick(&joy_position);
 			interface_select(&joy_position, &select_pos, &current_menu);
 			
