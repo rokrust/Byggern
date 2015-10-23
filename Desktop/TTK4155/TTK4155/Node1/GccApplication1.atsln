@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "GccApplication1", "GccApplication1\GccApplication1.cproj", "{6A6C1F84-165E-42F9-83D3-6F41DEC5B438}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Skynet", "..\..\..\Documents\Arduino\Skynet\Skynet.cppproj", "{07B459B4-8D76-4638-BC6D-A459BA2D616B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A6C1F84-165E-42F9-83D3-6F41DEC5B438}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6A6C1F84-165E-42F9-83D3-6F41DEC5B438}.Debug|AVR.Build.0 = Debug|AVR
+		{6A6C1F84-165E-42F9-83D3-6F41DEC5B438}.Release|AVR.ActiveCfg = Release|AVR
+		{6A6C1F84-165E-42F9-83D3-6F41DEC5B438}.Release|AVR.Build.0 = Release|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.ActiveCfg = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.Build.0 = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.ActiveCfg = Release|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
