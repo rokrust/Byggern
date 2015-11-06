@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
-void can_init(){
+void can_init(void){
 	mcp_init();
 	mcp_bitModify(MCP_RXB0CTRL, MCP_RXBCTRL_MASK, 0xff);
 	mcp_bitModify(MCP_RXB1CTRL, MCP_RXBCTRL_MASK, 0xff);	
@@ -88,4 +88,10 @@ can_message new_can_message(uint16_t id, uint8_t length, uint8_t* data){
 	
 	
 	return m;
+}
+
+void can_send_joystick_message(Joystick joy_position){
+	uint8_t joy_data[4] = {joy_position.x, joy_position.y, joy_position.offset_y, joy_position.offset_y};
+	can_message msg = new_can_message(MCP_JOYSTICK_MESSAGE, 4, joy_data);
+	can_write(&msg, MCP_TXB0CTRL);
 }

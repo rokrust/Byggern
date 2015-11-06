@@ -47,15 +47,26 @@ int main(void)
 	//putte denne i init
 	interface_print(current_menu);
 	
+	uint8_t score;
 	can_message msg;
 	//mcp_write(CANSTAT)
     while(1)
         {	
 			JOY_read_joystick(&joy_position);
-			uint8_t joy_data[4] = {joy_position.x, joy_position.y, joy_position.offset_y, joy_position.offset_y};
-			msg = new_can_message(MCP_JOYSTICK_MESSAGE, 4, joy_data);
-			can_write(&msg, MCP_TXB0CTRL);
+			can_send_joystick_message(joy_position);
 			//interface_select(joy_position, &select_pos, &current_menu);
+			
+			if(can_pollInterrupt()){
+				msg = can_read();
+				
+			}
+			if(msg.id == MCP_GAME_SCORE_MESSAGE){
+				score = msg.data[0];
+			}
+			
+			msg = new_can_message(MCP_BUTTON_PRESS, 1, JOY_read_right_button());
+			can_write(&msg, MCP_TXB0CTRL);
+			
 			
 		}
 		

@@ -123,6 +123,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="adc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="can.c">
       <SubType>compile</SubType>
     </Compile>
@@ -130,6 +136,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="game.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="game.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joy.c">

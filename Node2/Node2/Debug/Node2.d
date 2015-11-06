@@ -19,7 +19,7 @@ Node2.d Node2.o: .././Node2.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  .././config.h .././joy.h .././pwm.h .././usart.h .././spi.h .././mcp.h \
- .././mcp_defines.h .././can.h
+ .././mcp_defines.h .././can.h .././game.h .././adc.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -74,3 +74,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././mcp_defines.h:
 
 .././can.h:
+
+.././game.h:
+
+.././adc.h:

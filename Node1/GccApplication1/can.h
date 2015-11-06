@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "joy.h"
 
 typedef struct can_message can_message;
 
@@ -20,3 +21,4 @@ void can_write(can_message *msg, uint8_t tx_buffer);
 uint8_t can_pollInterrupt(void);
 
 void can_print(can_message msg);
+void can_send_joystick_message(Joystick joy_position);
