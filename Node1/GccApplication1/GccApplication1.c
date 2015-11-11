@@ -55,7 +55,6 @@ int main(void)
 			JOY_read_joystick(&joy_position);
 			can_send_joystick_message(joy_position);
 			//interface_select(joy_position, &select_pos, &current_menu);
-			
 			if(can_pollInterrupt()){
 				msg = can_read();
 				

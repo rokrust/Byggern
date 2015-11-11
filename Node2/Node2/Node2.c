@@ -57,10 +57,9 @@ int main(void)
 		}
 		
 		//Kanskje bruke en switch
-		printf("Blurf");
 		can_handle_joystick_message(msg);
 		can_handle_score_message(msg);
-		update_game_score(&score);
+		//update_game_score(&score); har plutselig sluttet aa funke (muligens)
 		motor_test();
 		printf("Encoder: %d\n", motor_encoder_read());
 		
