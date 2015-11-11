@@ -28,9 +28,19 @@ void update_game_score(game_score *score){
 		(score->score)++;
 	}
 	
-	printf("Score: %d\n", score->score);
+	//printf("Score: %d\n", score->score);
 	
 	can_message msg;
 	msg = new_can_message(MCP_GAME_SCORE_MESSAGE, 1, &score->score);
 	can_write(&msg, MCP_TXB0CTRL);
+}
+
+game_score new_score(uint8_t antallMaalinger, uint16_t sum, uint8_t boolState, uint8_t val){
+	game_score score;
+	score.antallMaalinger = antallMaalinger;
+	score.sum = sum;
+	score.boolState = boolState;
+	score.score = val;
+	
+	return score;
 }

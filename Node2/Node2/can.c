@@ -1,9 +1,12 @@
 #include "can.h"
 #include "mcp.h"
 #include "mcp_defines.h"
+#include "pwm.h"
 
 #include <stdlib.h>
 #include <avr/io.h>
+#include <stdio.h>
+
 void can_init(){
 	mcp_init();
 	mcp_bitModify(MCP_RXB0CTRL, MCP_RXBCTRL_MASK, 0xff);
@@ -77,7 +80,7 @@ uint8_t can_pollInterrupt(void){
 		}	
 	}
 	
-	printf("No interrupt detected!");
+	//printf("No interrupt detected!");
 	return 0x00;
 }
 
@@ -88,7 +91,19 @@ void can_print(can_message msg){
 	printf("\n");
 }
 
-
-
-
-
+void can_handle_joystick_message(can_message msg){
+	if(msg.id == MCP_JOYSTICK_MESSAGE){
+		printf("Found joy");
+		pwm_set_servo(msg.data[0]);
+	}
+}
+void can_handle_score_message(can_message msg){
+	if(msg.id == MCP_BUTTON_PRESS){
+		if(msg.data[0]){
+			PORTA |= (1<<PA2); //stop relay
+		}
+		else{
+			PORTA &= ~(1<<PA2); //activate relay
+		}
+	}
+}

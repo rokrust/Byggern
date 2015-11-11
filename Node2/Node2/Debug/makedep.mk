@@ -6,17 +6,23 @@ adc.c
 
 can.c
 
+dac.c
+
 game.c
 
 joy.c
 
 mcp.c
 
+motor_driver.c
+
 Node2.c
 
 pwm.c
 
 spi.c
+
+twi_master.c
 
 usart.c
 

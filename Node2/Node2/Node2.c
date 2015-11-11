@@ -5,13 +5,14 @@
  *  Author: haakome
  */ 
 
+#include "config.h"
+
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
 
 
-#include "config.h"
 #include "joy.h"
 #include "pwm.h"
 #include "usart.h"
@@ -21,6 +22,8 @@
 #include "can.h"
 #include "game.h"
 #include "adc.h"
+#include "motor_driver.h"
+#include "dac.h"
 
 int main(void)
 {
@@ -34,40 +37,33 @@ int main(void)
 	printf("PWM setup done\n");
 	adc_init();
 	printf("ADC setup done\n");
+	motor_init();
+	printf("Motor setup done\n");
+	dac_initialize(0);
+	printf("DAC setup done\n");
 	printf("Initialization done\n");
 	
 	DDRA |=(1<<PA2); //for solenoid
-	Joystick joy;
+	//Joystick joy;
 	can_message msg;
-	game_score score;
-	score.antallMaalinger = 0;
-	score.boolState = 0;
-	score.score = 0;
-	score.sum = 0;
+	game_score score = new_score(0, 0, 0, 0);
 	
+	motor_speed(100);
 	while(1)
 	{
-		printf("IR: %d\n", adc_read(0));
+		//printf("IR: %d\n", adc_read(0));
 		if(can_pollInterrupt()){
 			msg = can_read();
-			
-		}
-		if(msg.id == MCP_JOYSTICK_MESSAGE){
-			joy = JOY_new_joystick(msg.data[0], msg.data[1], msg.data[2], msg.data[3]);
-			pwm_set_servo(joy.x);
 		}
 		
-		if(msg.id == MCP_BUTTON_PRESS){
-			printf("Button pressed");
-			if(msg.data[0]){
-				PORTA |= (1<<PA2); //stop relay
-			}
-			else{
-				PORTA &= ~(1<<PA2); //activate relay
-			}
-		}
-		
+		//Kanskje bruke en switch
+		printf("Blurf");
+		can_handle_joystick_message(msg);
+		can_handle_score_message(msg);
 		update_game_score(&score);
+		motor_test();
+		printf("Encoder: %d\n", motor_encoder_read());
+		
 	}
 	
 	return 1;

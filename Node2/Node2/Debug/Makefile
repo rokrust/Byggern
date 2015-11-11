@@ -39,12 +39,15 @@ SUBDIRS :=
 C_SRCS +=  \
 ../adc.c \
 ../can.c \
+../dac.c \
 ../game.c \
 ../joy.c \
 ../mcp.c \
+../motor_driver.c \
 ../Node2.c \
 ../pwm.c \
 ../spi.c \
+../twi_master.c \
 ../usart.c
 
 
@@ -57,45 +60,57 @@ ASM_SRCS +=
 OBJS +=  \
 adc.o \
 can.o \
+dac.o \
 game.o \
 joy.o \
 mcp.o \
+motor_driver.o \
 Node2.o \
 pwm.o \
 spi.o \
+twi_master.o \
 usart.o
 
 OBJS_AS_ARGS +=  \
 adc.o \
 can.o \
+dac.o \
 game.o \
 joy.o \
 mcp.o \
+motor_driver.o \
 Node2.o \
 pwm.o \
 spi.o \
+twi_master.o \
 usart.o
 
 C_DEPS +=  \
 adc.d \
 can.d \
+dac.d \
 game.d \
 joy.d \
 mcp.d \
+motor_driver.d \
 Node2.d \
 pwm.d \
 spi.d \
+twi_master.d \
 usart.d
 
 C_DEPS_AS_ARGS +=  \
 adc.d \
 can.d \
+dac.d \
 game.d \
 joy.d \
 mcp.d \
+motor_driver.d \
 Node2.d \
 pwm.d \
 spi.d \
+twi_master.d \
 usart.d
 
 OUTPUT_FILE_PATH +=Node2.elf
@@ -112,6 +127,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

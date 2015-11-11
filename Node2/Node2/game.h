@@ -11,3 +11,4 @@ struct game_score{
 };
 
 void update_game_score(game_score *score);
+game_score new_score(uint8_t antallMaalinger, uint16_t sum, uint8_t boolState, uint8_t val);
