@@ -66,7 +66,6 @@ uint8_t can_pollInterrupt(void){
 		}	
 	}
 	
-	printf("No interrupt detected!");
 	return 0x00;
 	
 }

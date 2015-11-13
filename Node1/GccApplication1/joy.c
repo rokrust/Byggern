@@ -66,15 +66,15 @@ uint8_t JOY_read_y(void){
 	_delay_us(60);
 	return (*adc_data);
 }
-uint8_t JOY_read_left_slider(void){				//Kan ha blandet left og right
+uint8_t JOY_read_right_slider(void){				//Kan ha blandet left og right
 	volatile char *ext_joy = (char *) adc_data;	//MUX Address
 	ext_joy[0] = 0x06;							//Enable CH3
 	_delay_us(40);
 	return (uint8_t)(ext_joy[0]);
 }
-uint8_t JOY_read_rigth_slider(void){
+uint8_t JOY_read_left_slider(void){
 	volatile char *ext_joy = (char *) adc_data;	//MUX Address
-	ext_joy[0] = 0x07;							//Enable CH3
+	ext_joy[0] = 0x07;							//Enable CH4
 	_delay_us(40);
 	return (uint8_t)(ext_joy[0]);
 }

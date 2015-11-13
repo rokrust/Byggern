@@ -20,7 +20,7 @@ Node2.d Node2.o: .././Node2.c .././config.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  .././joy.h .././pwm.h .././usart.h .././spi.h .././mcp.h \
  .././mcp_defines.h .././can.h .././game.h .././adc.h .././motor_driver.h \
- .././dac.h
+ .././dac.h .././motor_controller.h .././pid.h
 
 .././config.h:
 
@@ -83,3 +83,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././motor_driver.h:
 
 .././dac.h:
+
+.././motor_controller.h:
+
+.././pid.h:

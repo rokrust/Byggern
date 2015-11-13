@@ -2,10 +2,13 @@
 #include "mcp.h"
 #include "mcp_defines.h"
 #include "pwm.h"
+#include "motor_driver.h"
+#include "pid.h"
 
 #include <stdlib.h>
 #include <avr/io.h>
 #include <stdio.h>
+#include <math.h>
 
 void can_init(){
 	mcp_init();
@@ -93,7 +96,6 @@ void can_print(can_message msg){
 
 void can_handle_joystick_message(can_message msg){
 	if(msg.id == MCP_JOYSTICK_MESSAGE){
-		printf("Found joy");
 		pwm_set_servo(msg.data[0]);
 	}
 }
@@ -107,3 +109,37 @@ void can_handle_score_message(can_message msg){
 		}
 	}
 }
+
+extern float max_encoder_value;
+
+void can_handle_slider_message(can_message msg){
+	if(msg.id == MCP_SLIDER_MESSAGE){
+		printf("In can: %d\n", msg.data[0]);
+		uint8_t slider_value = msg.data[0];
+		float r = (255 - slider_value)*(max_encoder_value/255.0);
+		//r = max_encoder_value / 2;
+		float y = motor_encoder_read();
+		float u = pid_generate(r, y, 0.01) / ((max_encoder_value+1)/255);
+				
+		//printf("r: %.3f   ", r);
+		//printf("y: %.3f   ", y);
+		//printf("u: %.3f\n", u);
+				
+		motor_speed(u);
+	}
+}
+		/*int16_t speed = msg.data[0];
+		//printf("Speed: %d\n", speed);
+		printf("Speed: %d\n", speed);
+		speed -= 127;
+		
+		if(speed > 0){
+			//printf("Speed: %d\n", speed);
+			motor_direction(right);
+			motor_speed(speed);
+		}
+		else{
+			//printf("Speed: %d\n", speed);
+			motor_direction(left);
+			motor_speed(abs(speed));
+		}*/

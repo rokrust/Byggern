@@ -24,3 +24,4 @@ void can_print(can_message msg);
 
 void can_handle_joystick_message(can_message msg);
 void can_handle_score_message(can_message msg);
+void can_handle_slider_message(can_message msg);

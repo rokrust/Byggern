@@ -12,7 +12,7 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-
+ 
 #include "joy.h"
 #include "pwm.h"
 #include "usart.h"
@@ -24,6 +24,10 @@
 #include "adc.h"
 #include "motor_driver.h"
 #include "dac.h"
+#include "motor_controller.h"
+#include "pid.h"
+
+float max_encoder_value;
 
 int main(void)
 {
@@ -39,19 +43,25 @@ int main(void)
 	printf("ADC setup done\n");
 	motor_init();
 	printf("Motor setup done\n");
-	dac_initialize(0);
+	dac_initialize(0b111);
 	printf("DAC setup done\n");
 	printf("Initialization done\n");
 	
 	DDRA |=(1<<PA2); //for solenoid
 	//Joystick joy;
-	can_message msg;
+	can_message msg = {0};
 	game_score score = new_score(0, 0, 0, 0);
+	max_encoder_value = controller_init();
 	
-	motor_speed(100);
+	printf("max_encoder_value: %.3f\n", max_encoder_value);
+	
+	
+	pid_init(-1, -2, -0.0);
+	
+	
+	//motor_speed(100);
 	while(1)
 	{
-		//printf("IR: %d\n", adc_read(0));
 		if(can_pollInterrupt()){
 			msg = can_read();
 		}
@@ -59,10 +69,16 @@ int main(void)
 		//Kanskje bruke en switch
 		can_handle_joystick_message(msg);
 		can_handle_score_message(msg);
-		//update_game_score(&score); har plutselig sluttet aa funke (muligens)
-		motor_test();
-		printf("Encoder: %d\n", motor_encoder_read());
+		can_handle_slider_message(msg); //FJERN GLOBAL VARIABEL
+
+
 		
+
+		
+		//printf("Speed: %d\n", speed);
+		//motor_speed(speed);
+		
+		_delay_ms(10);
 	}
 	
 	return 1;

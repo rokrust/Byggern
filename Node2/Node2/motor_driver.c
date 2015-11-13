@@ -6,23 +6,26 @@
 #include "dac.h"
 #include "motor_driver.h"
 
+#define test_bit( reg, bit ) (reg & (1 << bit))
 void motor_init(void) {
 	DDRF |= (1<<MOTOR_DIR) | (1<<MOTOR_EN) | (1<<MOTOR_SEL) | (1<<MOTOR_RST) | (1<<MOTOR_OE);
+	DDRK = 0;
 	PORTF |= (1 << MOTOR_EN);
 	motor_encoder_reset();
+	
 }
 
 int16_t motor_encoder_read(void){
 	uint16_t data;
 	
 	//Enable output and send high byte on PORT K
-	PORTF &=	~((1 << MOTOR_OE) | 
-			 (1 << MOTOR_SEL));
+	PORTF &=	~((1 << MOTOR_OE) |
+			(1 << MOTOR_SEL));
 	_delay_us(20);
 	data = (reverse(PINK) << 8);
 	
 	//Send low byte on PORT K
-	PORTF |= (1 << MOTOR_SEL); 
+	PORTF |= (1 << MOTOR_SEL);
 	_delay_us(20);
 	data += reverse(PINK);
 	
@@ -33,12 +36,24 @@ int16_t motor_encoder_read(void){
 }
 
 void motor_encoder_reset(){
-	PORTF &= (1 << MOTOR_RST);
+	PORTF &= ~(1 << MOTOR_RST);
 	_delay_us(20);
 	PORTF |= (1 << MOTOR_RST);
 }
 
-void motor_speed(uint8_t speed){
+void motor_speed(int16_t speed){
+	if(speed > 0){
+		motor_direction(right);
+	}
+	else{
+		motor_direction(left);
+		speed = abs(speed);
+	}
+	
+	if(speed > max_speed){
+		speed = max_speed;
+	}
+	
 	dac_write(0, speed);
 }
 
@@ -64,5 +79,7 @@ uint8_t reverse(uint8_t x){
 	x = (((x & 0xcc) >> 2) | ((x & 0x33) << 2));
 	x = (((x & 0xf0) >> 4) | ((x & 0x0f) << 4));
 	return x;
-
 }
+
+
+

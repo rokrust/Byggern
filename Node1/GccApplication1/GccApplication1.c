@@ -63,9 +63,13 @@ int main(void)
 				score = msg.data[0];
 			}
 			
-			msg = new_can_message(MCP_BUTTON_PRESS, 1, JOY_read_right_button());
+			msg = new_can_message(MCP_BUTTON_PRESS_MESSAGE, 1, JOY_read_right_button());
 			can_write(&msg, MCP_TXB0CTRL);
 			
+			uint8_t data = JOY_read_left_slider();
+			msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &data);
+			printf("Slider: %d\n", data);
+			can_write(&msg, MCP_TXB0CTRL);
 			
 		}
 		
