@@ -13,18 +13,16 @@
 #include <avr/interrupt.h>
 #include <stdio.h> 
 
-#include "config.h"
- 
-#include "joy.h"
-#include "usart.h"
-#include "oled.h"
-#include "SRAM.h"
-#include "interface.h"
-#include "spi.h"
-#include "mcp.h"
-#include "can.h"
-#include "mcp_defines.h"
-
+#include "Config/config.h"
+#include "Drivers/MultifunctionCard/joystick/joy.h"
+#include "Drivers/MultifunctionCard/oled/oled.h"
+#include "Drivers/Memory/SRAM.h"
+#include "Drivers/Communication/usart/usart.h"
+#include "Drivers/Communication/spi/spi.h"
+#include "Drivers/Communication/can/can.h"
+#include "Drivers/Communication/can/mcp/mcp.h"
+#include "Drivers/Communication/can/mcp/mcp_defines.h"
+#include "Interface/interface.h"
 
 int main(void)
 {
@@ -43,32 +41,31 @@ int main(void)
 	can_init();
 	printf("Initialization done\n");
 	current_menu = interface_init();
-
-	//putte denne i init
-	interface_print(current_menu);
 	
-	uint8_t score;
+	uint8_t ir_value = 0;
 	can_message msg;
-	//mcp_write(CANSTAT)
+	
     while(1)
         {	
 			JOY_read_joystick(&joy_position);
 			can_send_joystick_message(joy_position);
-			//interface_select(joy_position, &select_pos, &current_menu);
+			interface_select(joy_position, &select_pos, &current_menu);
+			
 			if(can_pollInterrupt()){
 				msg = can_read();
 				
 			}
-			if(msg.id == MCP_GAME_SCORE_MESSAGE){
-				score = msg.data[0];
+			
+			if(msg.id == MCP_IR_MESSAGE){
+				ir_value = msg.data[0];
 			}
 			
-			msg = new_can_message(MCP_BUTTON_PRESS_MESSAGE, 1, JOY_read_right_button());
+			uint8_t msg_data = JOY_read_left_slider();
+			msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &msg_data);
 			can_write(&msg, MCP_TXB0CTRL);
 			
-			uint8_t data = JOY_read_left_slider();
-			msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &data);
-			printf("Slider: %d\n", data);
+			msg_data = JOY_read_right_button();
+			msg = new_can_message(MCP_SOLENOID_MESSAGE, 1, &msg_data);
 			can_write(&msg, MCP_TXB0CTRL);
 			
 		}

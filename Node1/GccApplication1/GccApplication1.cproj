@@ -111,72 +111,92 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="can.c">
+    <Compile Include="Config\config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="can.h">
+    <Compile Include="Drivers\Communication\can\can.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="config.h">
+    <Compile Include="Drivers\Communication\can\can.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font.c">
+    <Compile Include="Drivers\Communication\can\mcp\mcp.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font.h">
+    <Compile Include="Drivers\Communication\can\mcp\mcp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\can\mcp\mcp_defines.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\spi\spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\spi\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\usart\usart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\usart\usart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Memory\SRAM.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Memory\SRAM.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\MultifunctionCard\joystick\joy.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\MultifunctionCard\joystick\joy.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\MultifunctionCard\oled\oled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\MultifunctionCard\oled\oled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Fonts\font.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Fonts\font.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Game\game.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Game\game.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="GccApplication1.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="interface.c">
+    <Compile Include="Interface\interface.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="interface.h">
+    <Compile Include="Interface\interface.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="joy.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="joy.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mcp.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mcp.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mcp_defines.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="oled.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="oled.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="oled2.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="spi.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="spi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="usart.h">
-      <SubType>compile</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Drivers" />
+    <Folder Include="Drivers\Communication\can\" />
+    <Folder Include="Drivers\Communication\can\mcp" />
+    <Folder Include="Drivers\Communication\usart" />
+    <Folder Include="Drivers\Communication\spi\" />
+    <Folder Include="Drivers\MultifunctionCard" />
+    <Folder Include="Drivers\MultifunctionCard\joystick" />
+    <Folder Include="Drivers\MultifunctionCard\oled" />
+    <Folder Include="Drivers\Communication" />
+    <Folder Include="Drivers\Memory" />
+    <Folder Include="Config" />
+    <Folder Include="Drivers\timer" />
+    <Folder Include="Fonts" />
+    <Folder Include="Game" />
+    <Folder Include="Interface" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

@@ -1,0 +1,1 @@
+void solenoid_init();

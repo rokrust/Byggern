@@ -2,31 +2,27 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-adc.c
+Controller\pid.c
 
-can.c
+Drivers\adc\adc.c
 
-dac.c
+Drivers\can\can.c
 
-game.c
+Drivers\dac\dac.c
 
-joy.c
+Drivers\mcp\mcp.c
 
-mcp.c
+Drivers\motor\motor_driver.c
 
-motor_controller.c
+Drivers\pwm\pwm.c
 
-motor_driver.c
+Drivers\solenoid.c
+
+Drivers\spi\spi.c
+
+Drivers\usart\usart.c
 
 Node2.c
 
-pid.c
-
-pwm.c
-
-spi.c
-
-twi_master.c
-
-usart.c
+TWI\twi_master.c
 

@@ -17,10 +17,18 @@ GccApplication1.d GccApplication1.o: .././GccApplication1.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
- .././config.h .././joy.h .././usart.h .././oled.h \
+ .././Config/config.h .././Drivers/MultifunctionCard/joystick/joy.h \
+ .././Drivers/MultifunctionCard/oled/oled.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- .././SRAM.h .././interface.h .././spi.h .././mcp.h .././can.h \
- .././mcp_defines.h
+ .././Drivers/Memory/SRAM.h .././Drivers/Communication/usart/usart.h \
+ .././Drivers/Communication/spi/spi.h \
+ .././Drivers/Communication/can/can.h \
+ .././Drivers/Communication/can/../../MultifunctionCard/joystick/joy.h \
+ .././Drivers/Communication/can/mcp/mcp.h \
+ .././Drivers/Communication/can/mcp/mcp_defines.h \
+ .././Interface/interface.h \
+ .././Interface/../Drivers/MultifunctionCard/joystick/joy.h \
+ .././Interface/../Drivers/MultifunctionCard/oled/oled.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -58,24 +66,30 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h:
 
-.././config.h:
+.././Config/config.h:
 
-.././joy.h:
+.././Drivers/MultifunctionCard/joystick/joy.h:
 
-.././usart.h:
-
-.././oled.h:
+.././Drivers/MultifunctionCard/oled/oled.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
-.././SRAM.h:
+.././Drivers/Memory/SRAM.h:
 
-.././interface.h:
+.././Drivers/Communication/usart/usart.h:
 
-.././spi.h:
+.././Drivers/Communication/spi/spi.h:
 
-.././mcp.h:
+.././Drivers/Communication/can/can.h:
 
-.././can.h:
+.././Drivers/Communication/can/../../MultifunctionCard/joystick/joy.h:
 
-.././mcp_defines.h:
+.././Drivers/Communication/can/mcp/mcp.h:
+
+.././Drivers/Communication/can/mcp/mcp_defines.h:
+
+.././Interface/interface.h:
+
+.././Interface/../Drivers/MultifunctionCard/joystick/joy.h:
+
+.././Interface/../Drivers/MultifunctionCard/oled/oled.h:

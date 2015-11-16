@@ -95,122 +95,121 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
-  <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
-  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <avrgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>DEBUG</Value>
-    </ListValues>
-  </avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
-  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
-  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-  <avrgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libm</Value>
-    </ListValues>
-  </avrgcc.linker.libraries.Libraries>
-  <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,-u,vfprintf -lprintf_flt -lm</avrgcc.linker.miscellaneous.LinkerFlags>
-  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
-</AvrGcc>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+        <avrgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcc.linker.libraries.Libraries>
+        <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,-u,vfprintf -lprintf_flt -lm</avrgcc.linker.miscellaneous.LinkerFlags>
+        <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+      </AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="adc.c">
+    <Compile Include="Config\config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="adc.h">
+    <Compile Include="Controller\pid.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="can.c">
+    <Compile Include="Controller\pid.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="can.h">
+    <Compile Include="Drivers\adc\adc.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="config.h">
+    <Compile Include="Drivers\adc\adc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="dac.c">
+    <Compile Include="Drivers\can\can.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="dac.h">
+    <Compile Include="Drivers\can\can.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="game.c">
+    <Compile Include="Drivers\dac\dac.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="game.h">
+    <Compile Include="Drivers\dac\dac.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="joy.c">
+    <Compile Include="Drivers\mcp\mcp.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="joy.h">
+    <Compile Include="Drivers\mcp\mcp.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="mcp.c">
+    <Compile Include="Drivers\mcp\mcp_defines.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="mcp.h">
+    <Compile Include="Drivers\motor\motor_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="mcp_defines.h">
+    <Compile Include="Drivers\motor\motor_driver.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="motor_controller.c">
+    <Compile Include="Drivers\pwm\pwm.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="motor_controller.h">
+    <Compile Include="Drivers\pwm\pwm.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="motor_driver.c">
+    <Compile Include="Drivers\solenoid.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="motor_driver.h">
+    <Compile Include="Drivers\spi\spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\spi\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\usart\usart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\usart\usart.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Node2.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pid.c">
+    <Compile Include="TWI\twi_master.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pid.h">
+    <Compile Include="TWI\twi_master.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pwm.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="pwm.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="spi.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="spi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="twi_master.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="twi_master.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="usart.h">
-      <SubType>compile</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Drivers" />
+    <Folder Include="Drivers\adc" />
+    <Folder Include="Drivers\can" />
+    <Folder Include="Drivers\dac" />
+    <Folder Include="Drivers\mcp" />
+    <Folder Include="Drivers\motor" />
+    <Folder Include="Drivers\usart" />
+    <Folder Include="Drivers\spi" />
+    <Folder Include="Drivers\pwm" />
+    <Folder Include="Controller" />
+    <Folder Include="Config" />
+    <Folder Include="TWI" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

@@ -5,29 +5,22 @@
  *  Author: haakome
  */ 
 
-#include "config.h"
+#include "Config/config.h"
+#include "Drivers/pwm/pwm.h"
+#include "Drivers/usart/usart.h"
+#include "Drivers/spi/spi.h"
+#include "Drivers/mcp/mcp.h"
+#include "Drivers/mcp/mcp_defines.h"
+#include "Drivers//can/can.h"
+#include "Drivers/adc/adc.h"
+#include "Drivers/motor/motor_driver.h"
+#include "Drivers/dac/dac.h"
+#include "Controller/pid.h"
 
 #include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
-
- 
-#include "joy.h"
-#include "pwm.h"
-#include "usart.h"
-#include "spi.h"
-#include "mcp.h"
-#include "mcp_defines.h"
-#include "can.h"
-#include "game.h"
-#include "adc.h"
-#include "motor_driver.h"
-#include "dac.h"
-#include "motor_controller.h"
-#include "pid.h"
-
-float max_encoder_value;
 
 int main(void)
 {
@@ -45,38 +38,22 @@ int main(void)
 	printf("Motor setup done\n");
 	dac_initialize(0b111);
 	printf("DAC setup done\n");
+	solenoid_init();
+	printf("Solenoid setup done\n");
 	printf("Initialization done\n");
+	pid_init(-1.0, -2.0, -0.0);
 	
-	DDRA |=(1<<PA2); //for solenoid
-	//Joystick joy;
 	can_message msg = {0};
-	game_score score = new_score(0, 0, 0, 0);
-	max_encoder_value = controller_init();
+	uint16_t max_encoder_value = pid_encoder_max_value();
 	
-	printf("max_encoder_value: %.3f\n", max_encoder_value);
-	
-	
-	pid_init(-1, -2, -0.0);
-	
-	
-	//motor_speed(100);
 	while(1)
 	{
 		if(can_pollInterrupt()){
 			msg = can_read();
 		}
-		
-		//Kanskje bruke en switch
-		can_handle_joystick_message(msg);
-		can_handle_score_message(msg);
-		can_handle_slider_message(msg); //FJERN GLOBAL VARIABEL
 
-
-		
-
-		
-		//printf("Speed: %d\n", speed);
-		//motor_speed(speed);
+		can_transmit_ir_value(adc_read(0));
+		can_handle_message(msg, max_encoder_value);
 		
 		_delay_ms(10);
 	}
