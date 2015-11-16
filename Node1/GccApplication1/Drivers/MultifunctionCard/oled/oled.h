@@ -5,7 +5,7 @@
 #include <avr/pgmspace.h>
 
 
-
+void oled_printf(char* fmt, ...);
 void oled_init(void);
 void oled_control_assign(uint8_t verdi);
 void oled_write(uint8_t character);

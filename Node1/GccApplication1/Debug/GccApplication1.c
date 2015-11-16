@@ -44,7 +44,7 @@ int main(void)
 	
 	uint8_t ir_value = 0;
 	can_message msg;
-	oled_printf("Kuksatan");
+	
     while(1)
         {	
 			JOY_read_joystick(&joy_position);

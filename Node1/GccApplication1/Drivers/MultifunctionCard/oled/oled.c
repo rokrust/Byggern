@@ -15,7 +15,7 @@ _delay_ms(100);
 
 #include "oled.h"
 #include "../../../Fonts/font.h"
-
+static FILE oled_stdout = FDEV_SETUP_STREAM(oled_write, NULL, _FDEV_SETUP_WRITE);
 
 void oled_init(){
 	oled_control_assign(0xae);    //display off
@@ -57,6 +57,7 @@ void oled_write(uint8_t character){
 		
 	}
 }
+
 void oled_set_start_col(int start_col){
 	oled_control_assign(0x21);
 	oled_control_assign(start_col);
@@ -83,4 +84,11 @@ void oled_initiate_party_mode(void){
 	_delay_ms(100);
 	oled_control_assign(0xa7);
 	_delay_ms(100);
+}
+
+void oled_printf(char* fmt, ...){
+	va_list v;
+	va_start(v, fmt);
+	vfprintf(&oled_stdout, fmt, v);
+	va_end(v);
 }

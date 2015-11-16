@@ -1,5 +1,7 @@
 #include "interface.h"
+#include "../Game/highscore.h"
 #include "../Fonts/font.h"
+
 #include <util/delay.h>
 #include <stdint.h>
 #include <avr/io.h>
@@ -32,7 +34,6 @@ Menu* new_Menu(char* title, void(*action)(void), uint8_t num_submenus){
 void interface_print(Menu *menu){
 	oled_clear_screen();
 	oled_set_start_col(0);
-	printf("Title: %s\n", menu->title);
 	oled_write_string(menu->title, 0);
 	
 	for(int i = 0; i < menu->num_submenus; i++){
@@ -40,10 +41,10 @@ void interface_print(Menu *menu){
 		oled_write_string(menu->submenus[i]->title, i + 1);
 	}
 	
-	draw_selector(1);
+	interface_draw_selector(1);
 	
 }
-void draw_selector(int select_pos){
+void interface_draw_selector(int select_pos){
 	oled_set_start_col(0);
 	oled_write(' ');
 	
@@ -65,14 +66,14 @@ void interface_select(Joystick joy, int *select_pos, Menu *(*current_menu)){
 		case UP:
 			if(*select_pos != 1){
 				(*select_pos)--;
-				draw_selector(*select_pos);
+				interface_draw_selector(*select_pos);
 			}
 			break;
 			
 		case DOWN:
 			if((*current_menu)->num_submenus != *select_pos){
 				(*select_pos)++;
-				draw_selector(*select_pos);
+				interface_draw_selector(*select_pos);
 			}
 			break;
 			

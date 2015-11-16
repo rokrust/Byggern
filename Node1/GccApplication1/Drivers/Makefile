@@ -33,11 +33,30 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../Debug/ \
+../Debug/Config/ \
+../Debug/Drivers/ \
+../Debug/Drivers/Communication/ \
+../Debug/Drivers/Communication/can/ \
+../Debug/Drivers/Communication/can/mcp/ \
+../Debug/Drivers/Communication/spi/ \
+../Debug/Drivers/Communication/usart/ \
+../Debug/Drivers/Memory/ \
+../Debug/Drivers/MultifunctionCard/ \
+../Debug/Drivers/MultifunctionCard/joystick/ \
+../Debug/Drivers/MultifunctionCard/oled/ \
+../Debug/Drivers/timer/ \
+../Debug/Fonts/ \
+../Debug/Game/ \
+../Debug/Interface/ \
 ../Drivers \
 ../Drivers/Communication/can/ \
 ../Drivers/Communication/can/mcp \
 ../Drivers/Communication/usart \
 ../Drivers/Communication/spi/ \
+../Drivers/Memory/MultifunctionCard/ \
+../Drivers/Memory/MultifunctionCard/joystick/ \
+../Drivers/Memory/MultifunctionCard/oled/ \
 ../Drivers/MultifunctionCard \
 ../Drivers/MultifunctionCard/joystick \
 ../Drivers/MultifunctionCard/oled \
@@ -52,15 +71,17 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Config/GccApplication1.c \
+../Debug/GccApplication1.c \
 ../Drivers/Communication/can/can.c \
 ../Drivers/Communication/can/mcp/mcp.c \
 ../Drivers/Communication/spi/spi.c \
 ../Drivers/Communication/usart/usart.c \
 ../Drivers/Memory/eeprom.c \
+../Drivers/Memory/MultifunctionCard/joystick/joy.c \
+../Drivers/Memory/MultifunctionCard/oled/oled.c \
 ../Drivers/Memory/SRAM.c \
-../Drivers/MultifunctionCard/joystick/joy.c \
 ../Drivers/MultifunctionCard/oled/oled.c \
-../Drivers/timer/timer.c \
 ../Fonts/font.c \
 ../Game/game.c \
 ../Game/highscore.c \
@@ -75,15 +96,17 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Config/GccApplication1.o \
+Debug/GccApplication1.o \
 Drivers/Communication/can/can.o \
 Drivers/Communication/can/mcp/mcp.o \
 Drivers/Communication/spi/spi.o \
 Drivers/Communication/usart/usart.o \
 Drivers/Memory/eeprom.o \
+Drivers/Memory/MultifunctionCard/joystick/joy.o \
+Drivers/Memory/MultifunctionCard/oled/oled.o \
 Drivers/Memory/SRAM.o \
-Drivers/MultifunctionCard/joystick/joy.o \
 Drivers/MultifunctionCard/oled/oled.o \
-Drivers/timer/timer.o \
 Fonts/font.o \
 Game/game.o \
 Game/highscore.o \
@@ -91,15 +114,17 @@ GccApplication1.o \
 Interface/interface.o
 
 OBJS_AS_ARGS +=  \
+Config/GccApplication1.o \
+Debug/GccApplication1.o \
 Drivers/Communication/can/can.o \
 Drivers/Communication/can/mcp/mcp.o \
 Drivers/Communication/spi/spi.o \
 Drivers/Communication/usart/usart.o \
 Drivers/Memory/eeprom.o \
+Drivers/Memory/MultifunctionCard/joystick/joy.o \
+Drivers/Memory/MultifunctionCard/oled/oled.o \
 Drivers/Memory/SRAM.o \
-Drivers/MultifunctionCard/joystick/joy.o \
 Drivers/MultifunctionCard/oled/oled.o \
-Drivers/timer/timer.o \
 Fonts/font.o \
 Game/game.o \
 Game/highscore.o \
@@ -107,15 +132,17 @@ GccApplication1.o \
 Interface/interface.o
 
 C_DEPS +=  \
+Config/GccApplication1.d \
+Debug/GccApplication1.d \
 Drivers/Communication/can/can.d \
 Drivers/Communication/can/mcp/mcp.d \
 Drivers/Communication/spi/spi.d \
 Drivers/Communication/usart/usart.d \
 Drivers/Memory/eeprom.d \
+Drivers/Memory/MultifunctionCard/joystick/joy.d \
+Drivers/Memory/MultifunctionCard/oled/oled.d \
 Drivers/Memory/SRAM.d \
-Drivers/MultifunctionCard/joystick/joy.d \
 Drivers/MultifunctionCard/oled/oled.d \
-Drivers/timer/timer.d \
 Fonts/font.d \
 Game/game.d \
 Game/highscore.d \
@@ -123,15 +150,17 @@ GccApplication1.d \
 Interface/interface.d
 
 C_DEPS_AS_ARGS +=  \
+Config/GccApplication1.d \
+Debug/GccApplication1.d \
 Drivers/Communication/can/can.d \
 Drivers/Communication/can/mcp/mcp.d \
 Drivers/Communication/spi/spi.d \
 Drivers/Communication/usart/usart.d \
 Drivers/Memory/eeprom.d \
+Drivers/Memory/MultifunctionCard/joystick/joy.d \
+Drivers/Memory/MultifunctionCard/oled/oled.d \
 Drivers/Memory/SRAM.d \
-Drivers/MultifunctionCard/joystick/joy.d \
 Drivers/MultifunctionCard/oled/oled.d \
-Drivers/timer/timer.d \
 Fonts/font.d \
 Game/game.d \
 Game/highscore.d \
@@ -181,6 +210,24 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+Config/%.o: ../Config/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Debug/%.o: ../Debug/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 Drivers/Communication/can/%.o: ../Drivers/Communication/can/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -216,7 +263,14 @@ Drivers/Memory/%.o: ../Drivers/Memory/%.c
 	@echo Finished building: $<
 	
 
-Drivers/MultifunctionCard/joystick/%.o: ../Drivers/MultifunctionCard/joystick/%.c
+Drivers/Memory/MultifunctionCard/joystick/%.o: ../Drivers/Memory/MultifunctionCard/joystick/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Memory/MultifunctionCard/oled/%.o: ../Drivers/Memory/MultifunctionCard/oled/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -224,13 +278,6 @@ Drivers/MultifunctionCard/joystick/%.o: ../Drivers/MultifunctionCard/joystick/%.
 	
 
 Drivers/MultifunctionCard/oled/%.o: ../Drivers/MultifunctionCard/oled/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Drivers/timer/%.o: ../Drivers/timer/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
