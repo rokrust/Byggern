@@ -18,6 +18,8 @@ Drivers\MultifunctionCard\joystick\joy.c
 
 Drivers\MultifunctionCard\oled\oled.c
 
+Drivers\Sensors\ir.c
+
 Drivers\timer\timer.c
 
 Fonts\font.c

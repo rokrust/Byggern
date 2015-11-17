@@ -22,6 +22,8 @@
 #include "Drivers/Communication/can/can.h"
 #include "Drivers/Communication/can/mcp/mcp.h"
 #include "Drivers/Communication/can/mcp/mcp_defines.h"
+#include "Drivers/timer/timer.h"
+#include "Game/game.h"
 #include "Interface/interface.h"
 
 int main(void)
@@ -39,35 +41,17 @@ int main(void)
 	printf("JOY setup done\n");
 	oled_init();
 	can_init();
+	timer_init();
+	ir_init();
 	printf("Initialization done\n");
 	current_menu = interface_init();
 	
-	uint8_t ir_value = 0;
-	can_message msg;
-	oled_printf("Kuksatan");
     while(1)
         {	
 			JOY_read_joystick(&joy_position);
-			can_send_joystick_message(joy_position);
 			interface_select(joy_position, &select_pos, &current_menu);
-			
-			if(can_pollInterrupt()){
-				msg = can_read();
-				
-			}
-			
-			if(msg.id == MCP_IR_MESSAGE){
-				ir_value = msg.data[0];
-			}
-			
-			uint8_t msg_data = JOY_read_left_slider();
-			msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &msg_data);
-			can_write(&msg, MCP_TXB0CTRL);
-			
-			msg_data = JOY_read_right_button();
-			msg = new_can_message(MCP_SOLENOID_MESSAGE, 1, &msg_data);
-			can_write(&msg, MCP_TXB0CTRL);
-			
+
+			game_main();
 		}
 		
 	return 1;

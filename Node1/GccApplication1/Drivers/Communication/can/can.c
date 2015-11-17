@@ -89,8 +89,21 @@ can_message new_can_message(uint16_t id, uint8_t length, uint8_t* data){
 	return m;
 }
 
-void can_send_joystick_message(Joystick joy_position){
-	uint8_t joy_data[4] = {joy_position.x, joy_position.y, joy_position.offset_y, joy_position.offset_y};
-	can_message msg = new_can_message(MCP_JOYSTICK_MESSAGE, 4, joy_data);
+void can_send_joystick_message(){
+	Joystick joy;
+	JOY_read_joystick(&joy);
+	uint8_t joy_data[1] = {joy.x};
+	can_message msg = new_can_message(MCP_JOYSTICK_MESSAGE, 1, joy_data);
+	can_write(&msg, MCP_TXB0CTRL);
+}
+
+void can_send_slider_message(){
+	uint8_t msg_data = JOY_read_left_slider();
+	can_message msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &msg_data);
+	can_write(&msg, MCP_TXB0CTRL);
+}
+void can_send_button_message(){
+	uint8_t msg_data= JOY_read_right_button();
+	can_message msg = new_can_message(MCP_SOLENOID_MESSAGE, 1, &msg_data);
 	can_write(&msg, MCP_TXB0CTRL);
 }

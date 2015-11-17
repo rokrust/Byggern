@@ -165,6 +165,12 @@
     <Compile Include="Drivers\MultifunctionCard\oled\oled.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\Sensors\ir.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Sensors\ir.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\timer\timer.c">
       <SubType>compile</SubType>
     </Compile>
@@ -208,6 +214,7 @@
     <Folder Include="Drivers\Communication" />
     <Folder Include="Drivers\Memory" />
     <Folder Include="Config" />
+    <Folder Include="Drivers\Sensors" />
     <Folder Include="Drivers\timer" />
     <Folder Include="Fonts" />
     <Folder Include="Game" />

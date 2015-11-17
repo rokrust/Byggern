@@ -1,71 +1,47 @@
-#include <stdint.h>
-#include "../Drivers/Communication/can/mcp/mcp.h"
-#include "../Drivers/Communication/can/mcp/mcp_defines.h"
-#include "../Drivers/Communication/can/can.h"
 #include "game.h"
+#include "highscore.h"
+#include "../Drivers/Sensors/ir.h"
+#include "../Interface/interface.h"
+#include "../Drivers/timer/timer.h"
 
+uint8_t game_score;
+uint8_t game_score_counter;
 
-game_score score = new_score(0, 0, 0, 0);
-
-void update_game_score(){
-	uint8_t newState = 0;
-	score.sum += ir_value;
-	(score.antallMaalinger)++;
-	
-	if(score.antallMaalinger == 20){
-		score.sum = score.sum/score.antallMaalinger;
-		score.antallMaalinger = 1;
-		if(score.sum < 100){
-			newState = 1;
-		}
-		else{
-			score.boolState = 0;
-			newState = 0;
-		}
-	}
-	
-	//Registering point
-	if(!score.boolState && newState){
-		score.boolState = 1;
-		(score.score)++;
-		
-	}
-	
+void game_start(void){
+	timer_enable();
+	game_reset_score();
+	oled_clear_screen();
 }
 
-int game_beam_blocked(uint8_t ir_value){
-	uint8_t newState = 0;
-	score.sum += ir_value;
-	(score.antallMaalinger)++;
+void game_track_score(){
+	game_score_counter++;
 	
-	if(score.antallMaalinger == 20){
-		score.sum = score.sum/score.antallMaalinger;
-		score.antallMaalinger = 1;
-		if(score.sum < 100){
-			newState = 1;
-		}
-		else{
-			score.boolState = 0;
-			newState = 0;
-		}
+	//Using 70 Hz clock
+	if(game_score_counter > 7){
+		game_score++;
+		game_score_counter = 0;
+		oled_set_start_col(16);
+		oled_printf("%d", game_score);
 	}
-	
-	//Registering point
-	if(!score.boolState && newState){
-		score.boolState = 1;
-		(score.score)++;
-		
-	}
+}
 
+void game_end(void){
+	timer_disable();
+	oled_clear_screen();
+	highscore_update(game_score);
+}
+
+void game_reset_score(void){
+	game_score = 0;
+	game_score_counter = 0;
+}
+
+void game_main(void){
+	game_start();
+	while(!ir_beam_blocked()){
+	}
+	
+	game_end();
 }
 
 
-game_score new_score(uint8_t antallMaalinger, uint16_t sum, uint8_t boolState, uint8_t val){
-	game_score score;
-	score.antallMaalinger = antallMaalinger;
-	score.sum = sum;
-	score.boolState = boolState;
-	score.score = val;
-	
-	return score;
-}

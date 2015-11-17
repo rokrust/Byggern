@@ -44,6 +44,7 @@ SUBDIRS :=  \
 ../Drivers/Communication \
 ../Drivers/Memory \
 ../Config \
+../Drivers/Sensors \
 ../Drivers/timer \
 ../Fonts \
 ../Game \
@@ -60,6 +61,7 @@ C_SRCS +=  \
 ../Drivers/Memory/SRAM.c \
 ../Drivers/MultifunctionCard/joystick/joy.c \
 ../Drivers/MultifunctionCard/oled/oled.c \
+../Drivers/Sensors/ir.c \
 ../Drivers/timer/timer.c \
 ../Fonts/font.c \
 ../Game/game.c \
@@ -83,6 +85,7 @@ Drivers/Memory/eeprom.o \
 Drivers/Memory/SRAM.o \
 Drivers/MultifunctionCard/joystick/joy.o \
 Drivers/MultifunctionCard/oled/oled.o \
+Drivers/Sensors/ir.o \
 Drivers/timer/timer.o \
 Fonts/font.o \
 Game/game.o \
@@ -99,6 +102,7 @@ Drivers/Memory/eeprom.o \
 Drivers/Memory/SRAM.o \
 Drivers/MultifunctionCard/joystick/joy.o \
 Drivers/MultifunctionCard/oled/oled.o \
+Drivers/Sensors/ir.o \
 Drivers/timer/timer.o \
 Fonts/font.o \
 Game/game.o \
@@ -115,6 +119,7 @@ Drivers/Memory/eeprom.d \
 Drivers/Memory/SRAM.d \
 Drivers/MultifunctionCard/joystick/joy.d \
 Drivers/MultifunctionCard/oled/oled.d \
+Drivers/Sensors/ir.d \
 Drivers/timer/timer.d \
 Fonts/font.d \
 Game/game.d \
@@ -131,6 +136,7 @@ Drivers/Memory/eeprom.d \
 Drivers/Memory/SRAM.d \
 Drivers/MultifunctionCard/joystick/joy.d \
 Drivers/MultifunctionCard/oled/oled.d \
+Drivers/Sensors/ir.d \
 Drivers/timer/timer.d \
 Fonts/font.d \
 Game/game.d \
@@ -152,6 +158,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
@@ -224,6 +232,13 @@ Drivers/MultifunctionCard/joystick/%.o: ../Drivers/MultifunctionCard/joystick/%.
 	
 
 Drivers/MultifunctionCard/oled/%.o: ../Drivers/MultifunctionCard/oled/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Sensors/%.o: ../Drivers/Sensors/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=4915200  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -Wextra -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

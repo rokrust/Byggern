@@ -1,7 +1,13 @@
+#include "../Sensors/ir.h"
 #include "../../Game/game.h"
+#include "../MultifunctionCard/joystick/joy.h"
+#include "../Communication/can/can.h"
+#include "../Sensors/ir.h"
+#include "../Communication/can/mcp/mcp_defines.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
 
 void timer_init() {
 	TCCR3A &= ~(1<<WGM30);
@@ -38,5 +44,23 @@ void timer_toggle(){
 }
 
 ISR(TIMER3_COMPA_vect){
-	if (!game_beam_blocked()){	game_keep_score(); }
+	can_message msg = new_can_message(0, 0, NULL);
+	uint8_t game_lost = 0;
+	
+	if(can_pollInterrupt()){
+		msg = can_read();
+	}
+	
+	if(msg.id == MCP_IR_MESSAGE){
+		game_lost = ir_beam_blocked(msg.data[0]);
+	}
+	
+	if (!game_lost){	
+		game_track_score(); 
+	}
+	
+	can_send_joystick_message();
+	can_send_slider_message();
+	can_send_button_message();
+	
 }

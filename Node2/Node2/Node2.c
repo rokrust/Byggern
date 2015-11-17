@@ -51,7 +51,7 @@ int main(void)
 		if(can_pollInterrupt()){
 			msg = can_read();
 		}
-
+		printf("%d\n", adc_read(0));
 		can_transmit_ir_value(adc_read(0));
 		can_handle_message(msg, max_encoder_value);
 		
