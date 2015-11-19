@@ -18,6 +18,7 @@ uint8_t ir_beam_blocked(uint8_t ir_value){
 	//Check state every 20 measures
 	if(ir.samples == 20){
 		ir.sum = ir.sum/ir.samples;
+		printf("Sum: %d\n", ir.sum);
 		ir.samples = 1;
 		
 		//Beam blocked continously
@@ -33,6 +34,7 @@ uint8_t ir_beam_blocked(uint8_t ir_value){
 	//IR beam blocked for more than 20 samples
 	if(!ir.beam_blocked && newState){
 		ir.beam_blocked = 1;
+		printf("Game lost.\n");
 		return 1;
 	}
 	return 0;

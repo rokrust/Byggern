@@ -27,7 +27,8 @@ GccApplication1.d GccApplication1.o: .././GccApplication1.c \
  .././Drivers/Communication/can/mcp/mcp.h \
  .././Drivers/Communication/can/mcp/mcp_defines.h \
  .././Drivers/timer/timer.h .././Drivers/timer/../Sensors/ir.h \
- .././Game/game.h .././Interface/interface.h \
+ .././Game/game.h .././Game/highscore.h \
+ .././Game/../Drivers/Memory/eeprom.h .././Interface/interface.h \
  .././Interface/../Drivers/MultifunctionCard/joystick/joy.h \
  .././Interface/../Drivers/MultifunctionCard/oled/oled.h
 
@@ -94,6 +95,10 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././Drivers/timer/../Sensors/ir.h:
 
 .././Game/game.h:
+
+.././Game/highscore.h:
+
+.././Game/../Drivers/Memory/eeprom.h:
 
 .././Interface/interface.h:
 

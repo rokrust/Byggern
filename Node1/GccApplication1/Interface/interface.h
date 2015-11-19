@@ -16,9 +16,10 @@ struct Menu{
 };
 
 Menu* new_Menu(char* title, void(*action)(void), uint8_t num_submenus);
-void interface_draw_selector(int select_pos);
+void interface_draw_selector(int row);
 void interface_print(Menu* menu);
-void interface_select(Joystick joy, int *select_pos, Menu *(*current_menu));
-Menu* interface_init();
+void interface_select();
+void interface_init();
+Menu* interface_get_current_menu();
 
 #endif

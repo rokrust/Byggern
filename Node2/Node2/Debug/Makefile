@@ -39,6 +39,7 @@ SUBDIRS :=  \
 ../Drivers/dac \
 ../Drivers/mcp \
 ../Drivers/motor \
+../Drivers/Sensors \
 ../Drivers/usart \
 ../Drivers/spi \
 ../Drivers/pwm \
@@ -56,6 +57,7 @@ C_SRCS +=  \
 ../Drivers/mcp/mcp.c \
 ../Drivers/motor/motor_driver.c \
 ../Drivers/pwm/pwm.c \
+../Drivers/Sensors/ir.c \
 ../Drivers/solenoid.c \
 ../Drivers/spi/spi.c \
 ../Drivers/usart/usart.c \
@@ -77,6 +79,7 @@ Drivers/dac/dac.o \
 Drivers/mcp/mcp.o \
 Drivers/motor/motor_driver.o \
 Drivers/pwm/pwm.o \
+Drivers/Sensors/ir.o \
 Drivers/solenoid.o \
 Drivers/spi/spi.o \
 Drivers/usart/usart.o \
@@ -91,6 +94,7 @@ Drivers/dac/dac.o \
 Drivers/mcp/mcp.o \
 Drivers/motor/motor_driver.o \
 Drivers/pwm/pwm.o \
+Drivers/Sensors/ir.o \
 Drivers/solenoid.o \
 Drivers/spi/spi.o \
 Drivers/usart/usart.o \
@@ -105,6 +109,7 @@ Drivers/dac/dac.d \
 Drivers/mcp/mcp.d \
 Drivers/motor/motor_driver.d \
 Drivers/pwm/pwm.d \
+Drivers/Sensors/ir.d \
 Drivers/solenoid.d \
 Drivers/spi/spi.d \
 Drivers/usart/usart.d \
@@ -119,6 +124,7 @@ Drivers/dac/dac.d \
 Drivers/mcp/mcp.d \
 Drivers/motor/motor_driver.d \
 Drivers/pwm/pwm.d \
+Drivers/Sensors/ir.d \
 Drivers/solenoid.d \
 Drivers/spi/spi.d \
 Drivers/usart/usart.d \
@@ -139,6 +145,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
@@ -207,6 +215,13 @@ Drivers/motor/%.o: ../Drivers/motor/%.c
 	
 
 Drivers/pwm/%.o: ../Drivers/pwm/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Sensors/%.o: ../Drivers/Sensors/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

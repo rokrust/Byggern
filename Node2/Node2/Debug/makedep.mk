@@ -16,6 +16,8 @@ Drivers\motor\motor_driver.c
 
 Drivers\pwm\pwm.c
 
+Drivers\Sensors\ir.c
+
 Drivers\solenoid.c
 
 Drivers\spi\spi.c

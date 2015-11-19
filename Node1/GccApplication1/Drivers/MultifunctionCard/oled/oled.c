@@ -15,7 +15,10 @@ _delay_ms(100);
 
 #include "oled.h"
 #include "../../../Fonts/font.h"
+#include "../joystick/joy.h"
 static FILE oled_stdout = FDEV_SETUP_STREAM(oled_write, NULL, _FDEV_SETUP_WRITE);
+
+int is_party_toggle;
 
 void oled_init(){
 	oled_control_assign(0xae);    //display off
@@ -41,7 +44,12 @@ void oled_init(){
 	oled_control_assign(0xa6);    //set normal display
 	oled_control_assign(0xaf);    // display on
 	oled_clear_screen();
+	
+	is_party_toggle = 0;
 }
+
+
+
 void oled_control_assign(uint8_t verdi){
 	*oled_control = verdi;
 }
@@ -70,20 +78,32 @@ void oled_write_string(char* str, int line_nbr){
 		oled_write(str[i]);
 	}
 }
+
 void oled_clear_screen(){
+	oled_set_start_col(0);
 	for(int page = 0; page < 8; page++){
 		oled_control_assign(0xB0 + page);
 		for(int i = 0; i < 128; ++i){
 			*oled_data = 0x00;
 		}
-		
 	}
 }
-void oled_initiate_party_mode(void){
-	oled_control_assign(0xa6);
-	_delay_ms(100);
-	oled_control_assign(0xa7);
-	_delay_ms(100);
+
+void oled_set_write_position(int row, int col){
+	oled_set_start_col(col);
+	oled_control_assign(0xb0 + row);
+}
+
+void oled_toggle_party_mode(void){
+	//Invert screen
+	if(is_party_toggle){
+		oled_control_assign(0xa6);
+		is_party_toggle=0;	
+	}
+	else{
+		oled_control_assign(0xa7);
+		is_party_toggle=1;		
+	}
 }
 
 void oled_printf(char* fmt, ...){
@@ -91,4 +111,18 @@ void oled_printf(char* fmt, ...){
 	va_start(v, fmt);
 	vfprintf(&oled_stdout, fmt, v);
 	va_end(v);
+}
+
+void oled_set_brightness(){
+	oled_clear_screen();
+	oled_set_write_position(2, 0);
+	oled_printf("Use the left");
+	oled_set_write_position(3, 0);
+	oled_printf("slider to");
+	oled_set_write_position(4, 0);
+	oled_printf("set brightness");
+	while(joy_get_direction() != LEFT){
+		oled_control_assign(0x81);
+		oled_control_assign(joy_read_left_slider());
+	}
 }

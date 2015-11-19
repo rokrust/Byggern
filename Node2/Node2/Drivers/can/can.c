@@ -14,16 +14,15 @@ void can_init(){
 	mcp_init();
 	mcp_bitModify(MCP_RXB0CTRL, MCP_RXBCTRL_MASK, 0xff);
 	mcp_bitModify(MCP_RXB1CTRL, MCP_RXBCTRL_MASK, 0xff);
-	mcp_bitModify(MCP_CANINTE, 0x3, 0x3);
+	mcp_bitModify(MCP_CANINTE, MCP_CANINTE_MASK, 0xff);
 	
 	mcp_bitModify(MCP_CANCTRL, MCP_CANCTRL_MASK, MCP_NORMAL_MODE);
 	
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 }
 
-can_message can_read(void){
+can_message can_read(uint8_t bufferSelect){
 	can_message msg;
-	uint8_t bufferSelect = can_pollInterrupt();
 	
 	msg.id = (mcp_read(bufferSelect + MCP_RXSIDH_OFFSET) << 3) | (mcp_read(bufferSelect + MCP_RXSIDL_OFFSET) >> 5);
 	msg.length = mcp_read(bufferSelect + MCP_RXBDLC_OFFSET) & MCP_RXBDLC_MASK;
@@ -70,11 +69,13 @@ uint8_t can_pollInterrupt(void){
 		
 		//Finds the register that sent an interrupt signal
 		if(interrupt_register & MCP_RX0IF){
+			//printf("Register 0\n");
 			mcp_bitModify(MCP_CANINTF, MCP_RX0IF, 0xFF);
 			return MCP_RXB0CTRL;
 		}
 		
 		else if(interrupt_register & MCP_RX1IF){
+			//printf("Register 1\n");
 			mcp_bitModify(MCP_CANINTF, MCP_RX1IF, 0xFF);
 			return MCP_RXB1CTRL;
 		}	
@@ -96,10 +97,10 @@ void can_handle_joystick_message(can_message msg){
 }
 void can_handle_solenoid_message(can_message msg){
 	if(msg.data[0]){
-		PORTA |= (1<<PA2); //stop relay
+		PORTA &= ~(1<<PA2); //activate relay
 	}
 	else{
-		PORTA &= ~(1<<PA2); //activate relay
+		PORTA |= (1<<PA2); //stop relay
 	}
 }
 void can_handle_slider_message(can_message msg, uint16_t max_encoder_value){
@@ -113,18 +114,31 @@ void can_handle_slider_message(can_message msg, uint16_t max_encoder_value){
 	float u = pid_generate(r, y, 0.01) / ((max_encoder_value+1)/255);
 	motor_speed(u);
 }
+void can_handle_pid_message(can_message msg){
+	printf("%.2f %.2f %.2f", -msg.data[0]*pow(10, -msg.data[1]), -msg.data[2]*pow(10, -msg.data[3]), -msg.data[4]*pow(10, -msg.data[5]));
+	pid_init(-msg.data[0]*pow(10, -msg.data[1]), -msg.data[2]*pow(10, -msg.data[3]), -msg.data[4]*pow(10, -msg.data[5]));
+}
 void can_handle_message(can_message msg, uint16_t max_encoder_value){
 	switch(msg.id){
 		case MCP_JOYSTICK_MESSAGE:
+			printf("Joy\n");
 			can_handle_joystick_message(msg);
 			break;
 		
 		case MCP_SOLENOID_MESSAGE:
+			printf("Sol\n");
 			can_handle_solenoid_message(msg);
 			break;
 		
 		case MCP_SLIDER_MESSAGE:
+			printf("Slide\n");
 			can_handle_slider_message(msg, max_encoder_value);
+			break;
+			
+		case MCP_PID_MESSAGE:
+			printf("Pid\n");
+			printf("Message");
+			can_handle_pid_message(msg);
 			break;
 	}
 }

@@ -17,7 +17,9 @@ Interface/interface.d Interface/interface.o: ../Interface/interface.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\lock.h \
  ../Interface/../Game/highscore.h \
  ../Interface/../Game/../Drivers/Memory/eeprom.h \
- ../Interface/../Fonts/font.h \
+ ../Interface/../Game/game.h ../Interface/../Fonts/font.h \
+ ../Interface/../Drivers/Communication/can/can.h \
+ ../Interface/../Drivers/Communication/can/../../MultifunctionCard/joystick/joy.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
@@ -61,7 +63,13 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 ../Interface/../Game/../Drivers/Memory/eeprom.h:
 
+../Interface/../Game/game.h:
+
 ../Interface/../Fonts/font.h:
+
+../Interface/../Drivers/Communication/can/can.h:
+
+../Interface/../Drivers/Communication/can/../../MultifunctionCard/joystick/joy.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h:
 

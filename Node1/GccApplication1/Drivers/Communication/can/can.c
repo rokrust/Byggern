@@ -90,20 +90,27 @@ can_message new_can_message(uint16_t id, uint8_t length, uint8_t* data){
 }
 
 void can_send_joystick_message(){
-	Joystick joy;
-	JOY_read_joystick(&joy);
-	uint8_t joy_data[1] = {joy.x};
-	can_message msg = new_can_message(MCP_JOYSTICK_MESSAGE, 1, joy_data);
+	printf("Sending message\n");
+	Joystick joy = joy_get_joystick();
+	uint8_t joy_data = joy.x;
+	can_message msg = new_can_message(MCP_JOYSTICK_MESSAGE, 1, &joy_data);
 	can_write(&msg, MCP_TXB0CTRL);
 }
 
 void can_send_slider_message(){
-	uint8_t msg_data = JOY_read_left_slider();
+	uint8_t msg_data = joy_read_left_slider();
 	can_message msg = new_can_message(MCP_SLIDER_MESSAGE, 1, &msg_data);
 	can_write(&msg, MCP_TXB0CTRL);
 }
 void can_send_button_message(){
-	uint8_t msg_data= JOY_read_right_button();
+	uint8_t msg_data= joy_read_right_button();
 	can_message msg = new_can_message(MCP_SOLENOID_MESSAGE, 1, &msg_data);
+	can_write(&msg, MCP_TXB0CTRL);
+}
+void can_send_pid_message(uint8_t kp_coeff, uint8_t kp_exp, uint8_t ki_coeff, uint8_t ki_exp, uint8_t kd_coeff, uint8_t kd_exp){
+	//Using the scientific form of the numbers.
+	uint8_t parameters[6] = {kp_coeff, kp_exp, ki_coeff, ki_exp, kd_coeff, kd_exp}; 
+	can_message msg = new_can_message(MCP_PID_MESSAGE, 6, parameters);
+	printf("yolomeister");
 	can_write(&msg, MCP_TXB0CTRL);
 }

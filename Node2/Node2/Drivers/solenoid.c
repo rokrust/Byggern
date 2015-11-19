@@ -1,3 +1,4 @@
+#include "solenoid.h"
 #include <avr/io.h>
 
 void solenoid_init(){

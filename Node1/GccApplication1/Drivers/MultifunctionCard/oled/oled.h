@@ -14,4 +14,7 @@ void oled_write_selector(void);
 void oled_set_start_col(int start_col);
 void oled_clear_screen(void);
 void oled_initiate_party_mode(void);
+void oled_set_write_position(int row, int col);
+void oled_toggle_party_mode(void);
+void oled_set_brightness(void);
 #endif

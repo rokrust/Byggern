@@ -172,7 +172,16 @@
     <Compile Include="Drivers\pwm\pwm.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\Sensors\ir.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Sensors\ir.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\solenoid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\solenoid.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\spi\spi.c">
@@ -204,6 +213,7 @@
     <Folder Include="Drivers\dac" />
     <Folder Include="Drivers\mcp" />
     <Folder Include="Drivers\motor" />
+    <Folder Include="Drivers\Sensors" />
     <Folder Include="Drivers\usart" />
     <Folder Include="Drivers\spi" />
     <Folder Include="Drivers\pwm" />

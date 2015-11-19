@@ -24,3 +24,4 @@ void can_print(can_message msg);
 void can_send_joystick_message();
 void can_send_slider_message();
 void can_send_button_message();
+void can_send_pid_message(uint8_t kp_coeff, uint8_t kp_exp, uint8_t ki_coeff, uint8_t ki_exp, uint8_t kd_coeff, uint8_t kd_exp);

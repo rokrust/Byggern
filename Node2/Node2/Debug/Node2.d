@@ -5,7 +5,7 @@ Node2.d Node2.o: .././Node2.c .././Config/config.h .././Drivers/pwm/pwm.h \
  .././Drivers/mcp/mcp.h .././Drivers/mcp/mcp_defines.h \
  .././Drivers//can/can.h .././Drivers/adc/adc.h \
  .././Drivers/motor/motor_driver.h .././Drivers/dac/dac.h \
- .././Controller/pid.h \
+ .././Drivers/Sensors/ir.h .././Controller/pid.h .././Drivers/solenoid.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
@@ -48,7 +48,11 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././Drivers/dac/dac.h:
 
+.././Drivers/Sensors/ir.h:
+
 .././Controller/pid.h:
+
+.././Drivers/solenoid.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h:
 

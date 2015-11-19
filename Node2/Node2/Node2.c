@@ -15,7 +15,9 @@
 #include "Drivers/adc/adc.h"
 #include "Drivers/motor/motor_driver.h"
 #include "Drivers/dac/dac.h"
+#include "Drivers/Sensors/ir.h"
 #include "Controller/pid.h"
+#include "Drivers/solenoid.h"
 
 #include <util/delay.h>
 #include <avr/io.h>
@@ -41,20 +43,21 @@ int main(void)
 	solenoid_init();
 	printf("Solenoid setup done\n");
 	printf("Initialization done\n");
+	ir_init();
+	solenoid_init();
 	pid_init(-1.0, -2.0, -0.0);
 	
 	can_message msg = {0};
 	uint16_t max_encoder_value = pid_encoder_max_value();
-	
+	uint8_t bufferSelect;
 	while(1)
 	{
-		if(can_pollInterrupt()){
-			msg = can_read();
+		bufferSelect = can_pollInterrupt();
+		if(bufferSelect){
+			msg = can_read(bufferSelect);
 		}
-		printf("%d\n", adc_read(0));
-		can_transmit_ir_value(adc_read(0));
 		can_handle_message(msg, max_encoder_value);
-		
+		ir_beam_blocked(adc_read(0));
 		_delay_ms(10);
 	}
 	
