@@ -14,32 +14,6 @@ void pwm_init(void){
 	TCCR3B &= ~(1 << CS31);
 	
 	ICR3 = 312;
-	//set non-inverting
-
-	
-	
-	/*
-	DDRH = (1 << DDH6);
-	
-	//fast pwm
-	TCCR4A &= ~(1 << WGM40);
-	TCCR4A |= (1 << WGM41);
-	TCCR4B |= (1 << WGM42) | (1 << WGM43);
-	
-	//set non-inverting
-	TCCR4A &= ~(1 << COM4A0);
-	TCCR4A |= (1 << COM4A1);
-	
-	//set prescaler
-	TCCR4B |= (1 << CS41);
-	TCCR4B &= ~((1 << CS42)|(1 << CS40));
-	
-	//Set duty cycle?
-	ICR4 = F_CPU/prescaler/1000*20;
-	
-	//Set on time?
-	OCR4A = 2/1000*F_CPU/prescaler;
-	*/
 }
 
 void pwm_set_value(unsigned int val){
@@ -47,7 +21,10 @@ void pwm_set_value(unsigned int val){
 }
 
 void pwm_set_servo(unsigned int val){
+	//Step length between 18 and 19.
 	val = (val*19)/255 + servo_min;
+	
+	//Fixes seizures in the servo
 	if((val <= (servo_mid + 1)) && (val >= (servo_mid - 1))){
 		pwm_set_value(servo_mid);
 	}

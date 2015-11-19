@@ -1,11 +1,13 @@
 Node2.d Node2.o: .././Node2.c .././Config/config.h .././Drivers/pwm/pwm.h \
- .././Drivers/usart/usart.h .././Drivers/spi/spi.h \
+ .././Drivers/Communication/usart/usart.h \
+ .././Drivers/Communication/spi/spi.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdint.h \
- .././Drivers/mcp/mcp.h .././Drivers/mcp/mcp_defines.h \
- .././Drivers//can/can.h .././Drivers/adc/adc.h \
- .././Drivers/motor/motor_driver.h .././Drivers/dac/dac.h \
- .././Drivers/Sensors/ir.h .././Controller/pid.h .././Drivers/solenoid.h \
+ .././Drivers/Communication/can/mcp/mcp.h \
+ .././Drivers/Communication/can/mcp/mcp_defines.h \
+ .././Drivers/Communication/can/can.h .././Drivers/Converters/adc/adc.h \
+ .././Drivers/motor/motor_driver.h .././Drivers/Converters/dac/dac.h \
+ .././Drivers/Sensors/ir.h .././Controller/pid.h .././Solenoid/solenoid.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
@@ -28,31 +30,31 @@ Node2.d Node2.o: .././Node2.c .././Config/config.h .././Drivers/pwm/pwm.h \
 
 .././Drivers/pwm/pwm.h:
 
-.././Drivers/usart/usart.h:
+.././Drivers/Communication/usart/usart.h:
 
-.././Drivers/spi/spi.h:
+.././Drivers/Communication/spi/spi.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdint.h:
 
-.././Drivers/mcp/mcp.h:
+.././Drivers/Communication/can/mcp/mcp.h:
 
-.././Drivers/mcp/mcp_defines.h:
+.././Drivers/Communication/can/mcp/mcp_defines.h:
 
-.././Drivers//can/can.h:
+.././Drivers/Communication/can/can.h:
 
-.././Drivers/adc/adc.h:
+.././Drivers/Converters/adc/adc.h:
 
 .././Drivers/motor/motor_driver.h:
 
-.././Drivers/dac/dac.h:
+.././Drivers/Converters/dac/dac.h:
 
 .././Drivers/Sensors/ir.h:
 
 .././Controller/pid.h:
 
-.././Drivers/solenoid.h:
+.././Solenoid/solenoid.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay.h:
 

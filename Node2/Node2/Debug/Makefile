@@ -34,35 +34,38 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../Drivers \
-../Drivers/adc \
-../Drivers/can \
-../Drivers/dac \
-../Drivers/mcp \
+../Drivers/Communication/can/ \
+../Drivers/Communication/can/mcp/ \
+../Drivers/Communication/spi/ \
+../Drivers/Communication/TWI/ \
+../Drivers/Communication/usart/ \
+../Drivers/Converters/adc/ \
+../Drivers/Converters/dac/ \
 ../Drivers/motor \
+../Drivers/Communication \
+../Drivers/Converters \
 ../Drivers/Sensors \
-../Drivers/usart \
-../Drivers/spi \
 ../Drivers/pwm \
 ../Controller \
 ../Config \
-../TWI
+../Solenoid
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Controller/pid.c \
-../Drivers/adc/adc.c \
-../Drivers/can/can.c \
-../Drivers/dac/dac.c \
-../Drivers/mcp/mcp.c \
+../Drivers/Communication/can/can.c \
+../Drivers/Communication/can/mcp/mcp.c \
+../Drivers/Communication/spi/spi.c \
+../Drivers/Communication/TWI/twi_master.c \
+../Drivers/Communication/usart/usart.c \
+../Drivers/Converters/adc/adc.c \
+../Drivers/Converters/dac/dac.c \
 ../Drivers/motor/motor_driver.c \
 ../Drivers/pwm/pwm.c \
 ../Drivers/Sensors/ir.c \
-../Drivers/solenoid.c \
-../Drivers/spi/spi.c \
-../Drivers/usart/usart.c \
 ../Node2.c \
-../TWI/twi_master.c
+../Solenoid/solenoid.c
 
 
 PREPROCESSING_SRCS += 
@@ -73,63 +76,63 @@ ASM_SRCS +=
 
 OBJS +=  \
 Controller/pid.o \
-Drivers/adc/adc.o \
-Drivers/can/can.o \
-Drivers/dac/dac.o \
-Drivers/mcp/mcp.o \
+Drivers/Communication/can/can.o \
+Drivers/Communication/can/mcp/mcp.o \
+Drivers/Communication/spi/spi.o \
+Drivers/Communication/TWI/twi_master.o \
+Drivers/Communication/usart/usart.o \
+Drivers/Converters/adc/adc.o \
+Drivers/Converters/dac/dac.o \
 Drivers/motor/motor_driver.o \
 Drivers/pwm/pwm.o \
 Drivers/Sensors/ir.o \
-Drivers/solenoid.o \
-Drivers/spi/spi.o \
-Drivers/usart/usart.o \
 Node2.o \
-TWI/twi_master.o
+Solenoid/solenoid.o
 
 OBJS_AS_ARGS +=  \
 Controller/pid.o \
-Drivers/adc/adc.o \
-Drivers/can/can.o \
-Drivers/dac/dac.o \
-Drivers/mcp/mcp.o \
+Drivers/Communication/can/can.o \
+Drivers/Communication/can/mcp/mcp.o \
+Drivers/Communication/spi/spi.o \
+Drivers/Communication/TWI/twi_master.o \
+Drivers/Communication/usart/usart.o \
+Drivers/Converters/adc/adc.o \
+Drivers/Converters/dac/dac.o \
 Drivers/motor/motor_driver.o \
 Drivers/pwm/pwm.o \
 Drivers/Sensors/ir.o \
-Drivers/solenoid.o \
-Drivers/spi/spi.o \
-Drivers/usart/usart.o \
 Node2.o \
-TWI/twi_master.o
+Solenoid/solenoid.o
 
 C_DEPS +=  \
 Controller/pid.d \
-Drivers/adc/adc.d \
-Drivers/can/can.d \
-Drivers/dac/dac.d \
-Drivers/mcp/mcp.d \
+Drivers/Communication/can/can.d \
+Drivers/Communication/can/mcp/mcp.d \
+Drivers/Communication/spi/spi.d \
+Drivers/Communication/TWI/twi_master.d \
+Drivers/Communication/usart/usart.d \
+Drivers/Converters/adc/adc.d \
+Drivers/Converters/dac/dac.d \
 Drivers/motor/motor_driver.d \
 Drivers/pwm/pwm.d \
 Drivers/Sensors/ir.d \
-Drivers/solenoid.d \
-Drivers/spi/spi.d \
-Drivers/usart/usart.d \
 Node2.d \
-TWI/twi_master.d
+Solenoid/solenoid.d
 
 C_DEPS_AS_ARGS +=  \
 Controller/pid.d \
-Drivers/adc/adc.d \
-Drivers/can/can.d \
-Drivers/dac/dac.d \
-Drivers/mcp/mcp.d \
+Drivers/Communication/can/can.d \
+Drivers/Communication/can/mcp/mcp.d \
+Drivers/Communication/spi/spi.d \
+Drivers/Communication/TWI/twi_master.d \
+Drivers/Communication/usart/usart.d \
+Drivers/Converters/adc/adc.d \
+Drivers/Converters/dac/dac.d \
 Drivers/motor/motor_driver.d \
 Drivers/pwm/pwm.d \
 Drivers/Sensors/ir.d \
-Drivers/solenoid.d \
-Drivers/spi/spi.d \
-Drivers/usart/usart.d \
 Node2.d \
-TWI/twi_master.d
+Solenoid/solenoid.d
 
 OUTPUT_FILE_PATH +=Node2.elf
 
@@ -179,28 +182,49 @@ Controller/%.o: ../Controller/%.c
 	@echo Finished building: $<
 	
 
-Drivers/adc/%.o: ../Drivers/adc/%.c
+Drivers/Communication/can/%.o: ../Drivers/Communication/can/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-Drivers/can/%.o: ../Drivers/can/%.c
+Drivers/Communication/can/mcp/%.o: ../Drivers/Communication/can/mcp/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-Drivers/dac/%.o: ../Drivers/dac/%.c
+Drivers/Communication/spi/%.o: ../Drivers/Communication/spi/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-Drivers/mcp/%.o: ../Drivers/mcp/%.c
+Drivers/Communication/TWI/%.o: ../Drivers/Communication/TWI/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Communication/usart/%.o: ../Drivers/Communication/usart/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Converters/adc/%.o: ../Drivers/Converters/adc/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Drivers/Converters/dac/%.o: ../Drivers/Converters/dac/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -228,27 +252,6 @@ Drivers/Sensors/%.o: ../Drivers/Sensors/%.c
 	@echo Finished building: $<
 	
 
-Drivers/%.o: ../Drivers/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Drivers/spi/%.o: ../Drivers/spi/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-Drivers/usart/%.o: ../Drivers/usart/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -256,7 +259,7 @@ Drivers/usart/%.o: ../Drivers/usart/%.c
 	@echo Finished building: $<
 	
 
-TWI/%.o: ../TWI/%.c
+Solenoid/%.o: ../Solenoid/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

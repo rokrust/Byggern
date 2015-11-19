@@ -1,6 +1,6 @@
 Drivers/motor/motor_driver.d Drivers/motor/motor_driver.o: \
  ../Drivers/motor/motor_driver.c ../Drivers/motor/../../Config/config.h \
- ../Drivers/motor/../dac/dac.h \
+ ../Drivers/motor/../Converters/dac/dac.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdint.h \
  ../Drivers/motor/motor_driver.h \
@@ -20,7 +20,7 @@ Drivers/motor/motor_driver.d Drivers/motor/motor_driver.o: \
 
 ../Drivers/motor/../../Config/config.h:
 
-../Drivers/motor/../dac/dac.h:
+../Drivers/motor/../Converters/dac/dac.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdint.h:
 

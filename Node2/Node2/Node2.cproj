@@ -133,31 +133,49 @@
     <Compile Include="Controller\pid.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\adc\adc.c">
+    <Compile Include="Drivers\Communication\can\can.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\adc\adc.h">
+    <Compile Include="Drivers\Communication\can\can.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can\can.c">
+    <Compile Include="Drivers\Communication\can\mcp\mcp.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\can\can.h">
+    <Compile Include="Drivers\Communication\can\mcp\mcp.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\dac\dac.c">
+    <Compile Include="Drivers\Communication\can\mcp\mcp_defines.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\dac\dac.h">
+    <Compile Include="Drivers\Communication\spi\spi.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp\mcp.c">
+    <Compile Include="Drivers\Communication\spi\spi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp\mcp.h">
+    <Compile Include="Drivers\Communication\TWI\twi_master.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\mcp\mcp_defines.h">
+    <Compile Include="Drivers\Communication\TWI\twi_master.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\usart\usart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Communication\usart\usart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Converters\adc\adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Converters\adc\adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Converters\dac\dac.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\Converters\dac\dac.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\motor\motor_driver.c">
@@ -178,48 +196,33 @@
     <Compile Include="Drivers\Sensors\ir.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Drivers\solenoid.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\solenoid.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\spi\spi.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\spi\spi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\usart\usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Drivers\usart\usart.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Node2.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TWI\twi_master.c">
+    <Compile Include="Solenoid\solenoid.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TWI\twi_master.h">
+    <Compile Include="Solenoid\solenoid.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Drivers" />
-    <Folder Include="Drivers\adc" />
-    <Folder Include="Drivers\can" />
-    <Folder Include="Drivers\dac" />
-    <Folder Include="Drivers\mcp" />
+    <Folder Include="Drivers\Communication\can\" />
+    <Folder Include="Drivers\Communication\can\mcp\" />
+    <Folder Include="Drivers\Communication\spi\" />
+    <Folder Include="Drivers\Communication\TWI\" />
+    <Folder Include="Drivers\Communication\usart\" />
+    <Folder Include="Drivers\Converters\adc\" />
+    <Folder Include="Drivers\Converters\dac\" />
     <Folder Include="Drivers\motor" />
+    <Folder Include="Drivers\Communication" />
+    <Folder Include="Drivers\Converters" />
     <Folder Include="Drivers\Sensors" />
-    <Folder Include="Drivers\usart" />
-    <Folder Include="Drivers\spi" />
     <Folder Include="Drivers\pwm" />
     <Folder Include="Controller" />
     <Folder Include="Config" />
-    <Folder Include="TWI" />
+    <Folder Include="Solenoid" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

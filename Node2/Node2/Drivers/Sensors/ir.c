@@ -1,14 +1,16 @@
 #include "ir.h"
-#include "../can/can.h"
-#include "../adc/adc.h"
+#include "../Communication/can/can.h"
+#include "../Converters/adc/adc.h"
 ir_state ir;
 
 void ir_init(void){
 	ir = new_ir_state(0, 0, 0, 0);
 }
 
+//Calculates the mean of the IR
+//over 20 samples. Ensures no double points
+//for bounces.
 uint8_t ir_beam_blocked(uint8_t ir_value){
-	//Used to determine if the beam was already blocked
 	ir.sum += ir_value;
 	(ir.samples)++;
 	
@@ -18,7 +20,7 @@ uint8_t ir_beam_blocked(uint8_t ir_value){
 		ir.samples = 1;
 		
 		//IR beam blocked for more than 20 samples
-		if(ir.sum < 100){
+		if(ir.sum < 50){
 			ir.new_state = 1;
 		}
 		

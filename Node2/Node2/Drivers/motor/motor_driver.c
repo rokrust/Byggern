@@ -1,5 +1,5 @@
 #include "../../Config/config.h"
-#include "../dac/dac.h"
+#include "../Converters/dac/dac.h"
 #include "motor_driver.h"
 
 #include <avr/io.h>

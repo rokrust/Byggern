@@ -86,58 +86,54 @@ void interface_draw_selector(int pos){
 	
 	oled_set_start_col(8);
 }
-void interface_select(){
-	direction previous_direction = NEUTRAL;
-		
-	while(joy_get_direction() != NEUTRAL){
-		previous_direction = joy_get_direction();
-	} //Wait for joy to reach neutral position.
+void interface_select(){ //version created using delay, 0,25s
 	
-	switch(previous_direction){
-		case UP:
+	if(joy_get_direction()!=NEUTRAL){
+		switch(joy_get_direction()){
+			case UP:
 			//Move selector up if it's not on line 0.
-			if(select_pos != 1){
-				select_pos--;
-				interface_draw_selector(select_pos);
-			}
-			break;
-			
-		case DOWN:
-			//Move selector down if it's not on line 7.
-			if(current_menu->num_submenus != select_pos){
-				(select_pos)++;
-				interface_draw_selector(select_pos);
-			}
-			break;
-			
-		case RIGHT:
-			//Check for Menu pointer and go to nex Menu.
-			if(current_menu->submenus[select_pos-1]->num_submenus){
-				current_menu = current_menu->submenus[select_pos-1];
-				interface_print(current_menu);
-				select_pos = 1;
+				if(select_pos != 1){
+					select_pos--;
+					interface_draw_selector(select_pos);
+				}
+				break;
 				
-			}
-			//Found function pointer.
-			else{
-				current_menu->submenus[select_pos-1]->action();
-			}
+			case DOWN:
+				//Move selector down if it's not on line 7.
+				if(current_menu->num_submenus != select_pos){
+					(select_pos)++;
+					interface_draw_selector(select_pos);
+				}
+				break;
+				
+			case RIGHT:
+				//Check for Menu pointer and go to nex Menu.
+				if(current_menu->submenus[select_pos-1]->num_submenus){
+					current_menu = current_menu->submenus[select_pos-1];
+					interface_print(current_menu);
+					select_pos = 1;
+				
+				}
+				//Found function pointer.
+				else{
+					current_menu->submenus[select_pos-1]->action();
+				}
 			
-			break;
+				break;
 			
-		case LEFT:
-			//Go to previous menu.
-			if(current_menu->prev){
-				select_pos = 1;
-				current_menu = current_menu->prev;
-				interface_print(current_menu);
-			}
-			break;
-		case NEUTRAL:
-			break;
-		
+			case LEFT:
+				//Go to previous menu.
+				if(current_menu->prev){
+					select_pos = 1;
+					current_menu = current_menu->prev;
+					interface_print(current_menu);
+				}
+				break;
+		}
+		_delay_ms(250);
 	}
 }
+
 Menu* interface_get_current_menu(){
 	return current_menu;
 }

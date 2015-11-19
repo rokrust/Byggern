@@ -4,13 +4,19 @@
 
 Controller\pid.c
 
-Drivers\adc\adc.c
+Drivers\Communication\can\can.c
 
-Drivers\can\can.c
+Drivers\Communication\can\mcp\mcp.c
 
-Drivers\dac\dac.c
+Drivers\Communication\spi\spi.c
 
-Drivers\mcp\mcp.c
+Drivers\Communication\TWI\twi_master.c
+
+Drivers\Communication\usart\usart.c
+
+Drivers\Converters\adc\adc.c
+
+Drivers\Converters\dac\dac.c
 
 Drivers\motor\motor_driver.c
 
@@ -18,13 +24,7 @@ Drivers\pwm\pwm.c
 
 Drivers\Sensors\ir.c
 
-Drivers\solenoid.c
-
-Drivers\spi\spi.c
-
-Drivers\usart\usart.c
-
 Node2.c
 
-TWI\twi_master.c
+Solenoid\solenoid.c
 

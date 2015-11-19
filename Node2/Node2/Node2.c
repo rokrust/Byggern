@@ -7,17 +7,17 @@
 
 #include "Config/config.h"
 #include "Drivers/pwm/pwm.h"
-#include "Drivers/usart/usart.h"
-#include "Drivers/spi/spi.h"
-#include "Drivers/mcp/mcp.h"
-#include "Drivers/mcp/mcp_defines.h"
-#include "Drivers//can/can.h"
-#include "Drivers/adc/adc.h"
+#include "Drivers/Communication/usart/usart.h"
+#include "Drivers/Communication/spi/spi.h"
+#include "Drivers/Communication/can/mcp/mcp.h"
+#include "Drivers/Communication/can/mcp/mcp_defines.h"
+#include "Drivers/Communication/can/can.h"
+#include "Drivers/Converters/adc/adc.h"
 #include "Drivers/motor/motor_driver.h"
-#include "Drivers/dac/dac.h"
+#include "Drivers/Converters/dac/dac.h"
 #include "Drivers/Sensors/ir.h"
 #include "Controller/pid.h"
-#include "Drivers/solenoid.h"
+#include "Solenoid/solenoid.h"
 
 #include <util/delay.h>
 #include <avr/io.h>
@@ -45,8 +45,8 @@ int main(void)
 	printf("Initialization done\n");
 	ir_init();
 	solenoid_init();
-	pid_init(-1.0, -2.0, -0.0);
-	
+	pid_init(-0.7, -1.5, -0.0);
+	DDRF |= ~(1 << PF0);
 	can_message msg = {0};
 	uint16_t max_encoder_value = pid_encoder_max_value();
 	uint8_t bufferSelect;
@@ -57,6 +57,7 @@ int main(void)
 			msg = can_read(bufferSelect);
 		}
 		can_handle_message(msg, max_encoder_value);
+		printf("%d\n", adc_read(0));
 		ir_beam_blocked(adc_read(0));
 		_delay_ms(10);
 	}

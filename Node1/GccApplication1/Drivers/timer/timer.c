@@ -17,7 +17,7 @@ void timer_init() {
 	TCCR3B |=  (1<<WGM32);
 	TCCR3B &= ~(1<<WGM33);
 	
-	OCR3A = 7*68; //68 for 70Hz, 4760 for 1Hz
+	OCR3A = 68; //68 for 70Hz, 4760 for 1Hz
 	
 	//enable interrupt on OCR3A compare
 	ETIMSK |= (1<<OCIE3A);
@@ -61,8 +61,7 @@ ISR(TIMER3_COMPA_vect){
 	}
 	
 
-	oled_toggle_party_mode();
-	
+	//oled_toggle_party_mode();
 	
 	can_send_joystick_message();
 	can_send_slider_message();

@@ -45,7 +45,6 @@ int main(void)
 	game_init(10);
 	printf("Initialization done\n");
 	interface_init();
-	highscore_resetAll();
     while(1)
         {	
 			interface_select();
